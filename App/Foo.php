@@ -5,7 +5,7 @@ class Foo
     
     public function bar()
     {
-        echo 'Hello sukei!111111';
+        echo 'Hello bar';
     }
 }
 

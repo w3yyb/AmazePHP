@@ -6,7 +6,7 @@ return [
         ['GET'],
         '/',
         function () {
-            echo 'welcome to the homepage';
+            echo 'welcome to AmazePHP';
         },
     ],
 
@@ -14,7 +14,7 @@ return [
         ['GET'],
         '/hello',
         function () {
-            echo 'Hello sukei!';
+            echo 'Hello AmazePHP!';
         },
     ],
 
@@ -29,7 +29,6 @@ return [
         '/hello44.php',
         function () {
             include 'App/aaaaa.php';
-
         },
     ],
 
@@ -49,7 +48,7 @@ return [
         ['POST'],
         '/users',
         function () {
-            echo 'post 1111111111';
+            echo 'post AmazePHP';
         },
     ],
 
@@ -58,7 +57,6 @@ return [
         '/users/:uid/posts/[:pid]',
         function ($uid, $pid = 99) {
             var_dump($uid, $pid);
-            // echo $uid. '~~~~~' .$pid;
         },
     ],
 
