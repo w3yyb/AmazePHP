@@ -1,0 +1,30 @@
+{
+
+  "name": "AmazePHP/AmazePHP",
+  "type": "project",
+  "description": "The AmazePHP Framework.",
+  "keywords": [
+      "framework",
+      "AmazePHP"
+  ],
+  "license": "MIT",
+
+
+    "require": {
+        "php": "8.1.*",
+        "thingengineer/mysqli-database-class": "dev-master",
+        "ramsey/uuid": "^4.3",
+        "guzzlehttp/guzzle": "^7.4",
+        "monolog/monolog": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {
+          "App\\": "App"
+      },
+        "classmap": [
+          "lib"
+        ],"files": [
+          "helper/functions.php"
+      ]
+      }
+}
