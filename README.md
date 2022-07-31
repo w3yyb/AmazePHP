@@ -1,21 +1,20 @@
 # AmazePHP
 AmazePHP  
-微型PHP框架  
-开始一个PHP小型项目的好选择,特别是对于API.  
+A good choice for starting a PHP small project, especially for APIs.   
 
 
-支持功能:  
-配置  
+features:  
+configuration  
 .env  
-路由  
+router    
 mysql class  
 uuid  
 http client  
-log日志  
+log   
 
 
-安装  
+install:    
  composer install  
 
- 要求:  
+ requirements:  
  php 8.1  
