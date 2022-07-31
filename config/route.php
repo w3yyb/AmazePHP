@@ -5,9 +5,7 @@ return [
     [
         ['GET'],
         '/',
-        function () {
-            echo 'welcome to AmazePHP';
-        },
+        [new App\Index, 'index'],
     ],
 
     [
