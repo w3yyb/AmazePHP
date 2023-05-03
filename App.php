@@ -12,6 +12,17 @@ try {
 
     $router->doRouting();
 } catch (Throwable $e) {
-    http_response_code(404);
-    include '404.html';
+    
+    $errorinfo  =$e->getMessage();
+
+    if ($errorinfo == '404 Not Found') {
+        http_response_code(404);
+        include '404.html';
+    }else{
+
+        http_response_code(500);
+        include '500.html';
+    }
+     
+   
 }
