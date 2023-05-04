@@ -64,7 +64,8 @@ function value($value, ...$args)
 
 function config($key = null, $default = null)
 {
-    $config= new LoadConfiguration();
+    $config= LoadConfiguration::getInstance();
+    // var_dump($config);
 
     // global $config;
     // debug_print_backtrace();
