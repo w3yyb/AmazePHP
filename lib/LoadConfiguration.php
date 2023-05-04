@@ -7,6 +7,7 @@ use SplFileInfo as SplFileInfo;
 
 class LoadConfiguration
 {
+    use SingletonTrait;
     /**
      * Bootstrap the given application.
      *
