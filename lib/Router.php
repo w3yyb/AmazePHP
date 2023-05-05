@@ -10,7 +10,7 @@ class Router
         if ($url !== '/') {//去除url尾部斜杠
             while ($url !== $url = rtrim($url, '/'));
         }
-        
+
         $this->routes[] = ['method' => $method, 'url' => $url, 'callback' => $callback];
         $this->routeCount++;
     }
@@ -28,7 +28,7 @@ class Router
         }
 
         $reqMet = $_SERVER['REQUEST_METHOD'];
-    
+
         foreach ($this->routes as $route) {
             // convert urls like '/users/:uid/posts/:pid' to regular expression
 
@@ -41,7 +41,7 @@ class Router
 
             $matches = array();
             // check if the current request matches the expression
-            if ($reqMet == $route['method'] && preg_match($pattern, $reqUrl, $matches)) {
+            if (  $reqMet =='HEAD'  ||     (  $reqMet == $route['method'] && preg_match($pattern, $reqUrl, $matches))) {
                 // remove the first match
                 array_shift($matches);
 
@@ -54,6 +54,8 @@ class Router
                 // var_dump($ismatch);
 
                 return call_user_func_array($route['callback'], $matches);
+            } elseif ($reqMet != $route['method']) {
+                throw new Exception("405 Not Allowed");
             } else {
                 $ismatch++;
             }
@@ -70,4 +72,3 @@ class Router
 // spl_autoload_register(function ($class_name) {
 //     require_once __DIR__ . '/' .  str_replace('\\', '/', $class_name) . '.php';
 // });
-
