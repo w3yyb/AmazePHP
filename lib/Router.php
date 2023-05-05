@@ -41,7 +41,7 @@ class Router
 
             $matches = array();
             // check if the current request matches the expression
-            if (  $reqMet =='HEAD'  ||     (  $reqMet == $route['method'] && preg_match($pattern, $reqUrl, $matches))) {
+            if (($route['method'] =='*'  || strstr($route['method'], $reqMet) || $reqMet =='HEAD'  ||    $reqMet == $route['method'])        && preg_match($pattern, $reqUrl, $matches)) {
                 // remove the first match
                 array_shift($matches);
 
@@ -54,8 +54,9 @@ class Router
                 // var_dump($ismatch);
 
                 return call_user_func_array($route['callback'], $matches);
-            } elseif ($reqMet != $route['method']) {
-                throw new Exception("405 Not Allowed");
+            // } elseif (!strstr($route['method'], $reqMet)) {
+            //     $ismatch++;
+            //     throw new Exception("405 Not Allowed");
             } else {
                 $ismatch++;
             }
