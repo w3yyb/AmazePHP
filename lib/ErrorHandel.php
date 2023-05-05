@@ -1,7 +1,9 @@
 <?php
+
 use Monolog\Level;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+
 class ErrorHandel
 {
     private array $levels = [
@@ -84,6 +86,26 @@ class ErrorHandel
             //"404 Not Found" should throw  by your router
             http_response_code(404);
             include "../404.html";
+        } elseif ($errorinfostr == "405 Not Allowed") {
+            http_response_code(405);
+            echo '<html>
+            <head>
+               <title>
+                  405 Not Allowed
+               </title>
+         </head>
+            <body>
+               <center>
+                  <h1>
+                     405 Not Allowed
+                  </h1>
+         </center>
+               <hr>
+               <center>
+                   
+               </center>
+         </body>
+         </html>';
         } else {
             http_response_code(500);
             $this->logError($errorinfo, "error");
@@ -112,12 +134,12 @@ class ErrorHandel
             case E_RECOVERABLE_ERROR:
                 $this->logError($error, "error");
                 return 'error';
-            break;
+                break;
             case E_USER_DEPRECATED:
             case E_DEPRECATED:
                 $this->logError($error, "info");
                 return "info";
-            break;
+                break;
             case E_NOTICE:
             case E_USER_NOTICE:
             case E_STRICT:
@@ -127,7 +149,7 @@ class ErrorHandel
             case E_USER_WARNING:
                 $this->logError($error, "warning");
                 return 'warning';
-                            break;
+                break;
             default:
                 $this->logError($error, "warning");
         }
