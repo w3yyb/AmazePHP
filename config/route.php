@@ -7,9 +7,36 @@ return [
         '/',
         [new App\Index, 'index'],
     ],
+    [
+        ['GET'],
+        '/search',
+        [new App\Index, 'search'],
+    ],
 
     [
         ['GET'],
+        '/tool-:id[/]',
+        [new App\Index, 'tool'],
+    ],
+
+    [
+        ['GET'],
+        '/tool-:id',
+        [new App\Index, 'tool'],
+    ],
+
+
+
+    [
+        ['GET'],
+        '/category-:cid.html',
+        [new App\Index, 'category'],
+
+    ],
+
+
+    [
+        ['PUT,GET'],
         '/hello',
         function () {
             echo 'Hello AmazePHP!';
@@ -43,7 +70,7 @@ return [
     ],
 
     [
-        ['POST'],
+        ['GET,POST'],
         '/users',
         function () {
             echo 'post AmazePHP';
@@ -51,7 +78,7 @@ return [
     ],
 
     [
-        ['GET'],
+        ['*'],
         '/users/:uid/posts/[:pid]',
         function ($uid, $pid = 99) {
             var_dump($uid, $pid);
