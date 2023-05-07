@@ -8,7 +8,7 @@ class Router
     public function addRoute($method, $url, $callback)
     {
         if ($url !== '/') {//去除url尾部斜杠
-            while ($url !== $url = rtrim($url, '/'));
+            while ($url !== $url = rtrim($url, '/'));//不应该去除url尾部斜杠，以后要改
         }
 
         $this->routes[] = ['method' => $method, 'url' => $url, 'callback' => $callback];
@@ -17,15 +17,13 @@ class Router
 
     public function doRouting()
     {
-        $ismatch=0;
+        $is_match=0;
         // I used PATH_INFO instead of REQUEST_URI, because the
         // application may not be in the root direcory
         // and we dont want stuff like ?var=value
         $reqUrl = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);//$_SERVER['PATH_INFO'];
 
-        if ($reqUrl !== '/') {//去除url尾部斜杠
-            // while ($reqUrl !== $reqUrl = rtrim($reqUrl, '/'));
-        }
+       
 
         $reqMet = $_SERVER['REQUEST_METHOD'];
 
@@ -41,7 +39,7 @@ class Router
 
             $matches = array();
             // check if the current request matches the expression
-            if (($route['method'] =='*'  || strstr($route['method'], $reqMet) || $reqMet =='HEAD'  ||    $reqMet == $route['method'])        && preg_match($pattern, $reqUrl, $matches)) {
+            if (preg_match($pattern, $reqUrl, $matches)) {
                 // remove the first match
                 array_shift($matches);
 
@@ -51,18 +49,22 @@ class Router
                     }
                 }
                 // call the callback with the matched positions as params
-                // var_dump($ismatch);
+
+                if ($route['method'] !=='*'  && $reqMet !=='HEAD'  && (
+                    !empty($route['method']) &&
+                    !in_array($reqMet, explode(',', $route['method'])))
+                ) {
+                    throw new Exception("405 Not Allowed");
+                }
+                
 
                 return call_user_func_array($route['callback'], $matches);
-            // } elseif (!strstr($route['method'], $reqMet)) {
-            //     $ismatch++;
-            //     throw new Exception("405 Not Allowed");
             } else {
-                $ismatch++;
+                $is_match++;
             }
         }
 
-        if ($ismatch == $this->routeCount) {
+        if ($is_match == $this->routeCount) {
             throw new Exception("404 Not Found");
         }
     }
