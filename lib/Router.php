@@ -30,7 +30,7 @@ class Router
         foreach ($this->routes as $route) {
             // convert urls like '/users/:uid/posts/:pid' to regular expression
 
-            $patterns = array('/[:[a-zA-Z0-9\_\-]+]/','/:[a-zA-Z0-9\_\-]+/');
+            $patterns = array('/\[:[a-zA-Z0-9\_\-]+\]/','/:[a-zA-Z0-9\_\-]+/');
             $replace = array('([a-zA-Z0-9\-\_]*)','([a-zA-Z0-9\-\_]+)');
 
 
