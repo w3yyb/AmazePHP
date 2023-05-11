@@ -12,6 +12,8 @@ It only takes 1 minute to start a project.
 - http client  
 - log   
 - template engine
+- error handling  
+- Singleton 
 
 
 ## install:    
