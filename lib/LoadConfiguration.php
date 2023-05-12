@@ -41,6 +41,7 @@ class LoadConfiguration
 
         $this->repo=$repository = new ConfigRepository($items);
 
+
         $config_path = __DIR__ . '/../config';
 
         if (! isset($loadedFromCache)) {
@@ -64,6 +65,13 @@ class LoadConfiguration
     public function get($key,$val){
 
         return $this->repo->get($key,$val);
+
+    }
+
+
+    public function set( array $key){
+
+        return $this->repo->set($key);
 
     }
 
