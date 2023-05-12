@@ -1,4 +1,5 @@
 <?php
+define('BASE_PATH', __DIR__);
 
 include 'vendor/autoload.php';
 (new DotEnv());
