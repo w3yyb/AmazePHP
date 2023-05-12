@@ -14,6 +14,7 @@ It only takes 1 minute to start a project.
 - template engine
 - error handling  
 - Singleton 
+- macroable 
 
 
 ## install:    
