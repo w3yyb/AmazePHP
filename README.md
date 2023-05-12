@@ -41,3 +41,10 @@ The framework core directory, include some lib class. And you can put  your clas
 ### The public Directory
 The public directory contains the index.php file, which is the entry point for all requests entering your application and configures autoloading. This directory also houses your assets such as images, JavaScript, and CSS.
 
+ ## usage 
+ ### get config  
+  config('app'); //will read config/app.php  app.php is return an array.  
+  config('app.url')// == config('app')['url'];  
+ 
+ 
+
