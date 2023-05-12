@@ -43,13 +43,28 @@ The public directory contains the index.php file, which is the entry point for a
 
  ## usage 
  ### get config  
+ ``` 
   config('app'); //will read config/app.php  app.php is return an array.  
   config('app.url')// == config('app')['url'];  
+  ``` 
   
  ### set config 
  ``` 
-      config([   'sample.haha' =>'6666']);
+ config(['sample.haha' =>'6666']);
 ``` 
- 
+``` 
+ config(['sample.hahahaha' =>[
+        ['a'=>4],
+        ['b'=>5],
+        ['c'=>6],
+ ]]);
+``` 
+ ``` 
+ config(['sample' =>[
+            ['a'=>4],
+            ['b'=>5],
+            ['c'=>6],
+  ]]);
+ ``` 
  
 
