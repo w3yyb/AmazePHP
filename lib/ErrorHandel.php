@@ -48,7 +48,8 @@ class ErrorHandel
         register_shutdown_function([$this, "shutdownFunction"]);
 
         $this->log= new Logger('errorlog');
-        $this->log->pushHandler(new StreamHandler('error.log', Level::Warning));
+        $logfile= BASE_PATH.'/cache/error.log';
+        $this->log->pushHandler(new StreamHandler($logfile, Level::Warning));
     }
 
     public function shutdownFunction()
