@@ -32,7 +32,7 @@ class DotEnv
 
     public function __construct(array $options = [])
     {
-        define('BASE_PATH', dirname(__DIR__));
+        // define('BASE_PATH', dirname(__DIR__));
         $path=BASE_PATH.'/.env';
         if (!file_exists($path)) {
             throw new \InvalidArgumentException(sprintf('%s does not exist', $path));
