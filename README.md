@@ -45,6 +45,11 @@ The public directory contains the index.php file, which is the entry point for a
  ### get config  
   config('app'); //will read config/app.php  app.php is return an array.  
   config('app.url')// == config('app')['url'];  
+  
+ ### set config 
+ ``` 
+      config([   'sample.haha' =>'6666']);
+``` 
  
  
 
