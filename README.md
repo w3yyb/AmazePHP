@@ -110,8 +110,8 @@ see config/route.php
             echo 'Hello AmazePHP!';
         },
     ],
-    ```
-    ```
+```
+```
      [
         ['*'],
         '/users/:uid/posts/[:pid]',
@@ -119,13 +119,13 @@ see config/route.php
             var_dump($uid, $pid);
         },
     ],
-    ```
-    ```
+```
+```
        [
         ['GET'],
         '/a/:uid/b/:pid',
         ['App\myclass', 'say_hello'],//static method
     ],
-    ```
+```
     
     
