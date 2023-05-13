@@ -127,3 +127,20 @@ function array2json($array)
 {
     return json_encode($array, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
 }
+
+/*
+Log::emergency($message);
+Log::alert($message);
+Log::critical($message);
+Log::error($message);
+Log::warning($message);
+Log::notice($message);
+Log::info($message);
+Log::debug($message);
+
+ */
+function logs($msg, $type='error')
+{
+    $log=new Log();
+    $log::$type($msg);
+}
