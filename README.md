@@ -99,7 +99,7 @@ see config/route.php
   [
         ['GET'],
         '/',
-        [new App\Index, 'index'],
+        [new App\Index, 'index'],//object method
     ],
 ```
 ```
@@ -125,6 +125,20 @@ see config/route.php
         ['GET'],
         '/a/:uid/b/:pid',
         ['App\myclass', 'say_hello'],//static method
+    ],
+```
+```
+ [
+        ['GET'],
+        '/hello2',
+        'callbackFunction',
+    ],
+```
+```
+  [
+        ['GET'],
+        '/tool-:id[/]',//Remove the trailing slash
+        [new App\Index, 'tool'],
     ],
 ```
     
