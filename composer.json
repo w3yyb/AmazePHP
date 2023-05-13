@@ -17,7 +17,8 @@
         "guzzlehttp/guzzle": "^7.5",
         "monolog/monolog": "^3.3",
         "eftec/bladeone": "^4.9",
-    "spatie/macroable": "^2.0"
+    "spatie/macroable": "^2.0",
+    "eftec/cacheone": "^2.16"
     },
     "autoload": {
         "psr-4": {
