@@ -1,4 +1,6 @@
 <?php
+use eftec\bladeone\BladeOne;
+
 function env($key, $default = null)
 {
     $apcu_key="env$key";
@@ -59,6 +61,15 @@ function value($value, ...$args)
     return $value instanceof Closure ? $value(...$args) : $value;
 }
 
+
+function view($view = null, $data = [])
+    {
+        $views = BASE_PATH  . "/template";
+        $cache = BASE_PATH. "/cache";
+        $blade = new BladeOne($views, $cache, BladeOne::MODE_AUTO);
+        return $blade->run($view, $data);
+
+    }
 
 
 
