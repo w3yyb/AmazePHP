@@ -80,3 +80,8 @@ cache(['key' => 'value'], 10);
 ```
 echo view('greeting', ['name' => 'James']);
 ``` 
+###  get env
+```
+env('key');
+env('key','default');
+```
