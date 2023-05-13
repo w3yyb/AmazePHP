@@ -85,3 +85,11 @@ echo view('greeting', ['name' => 'James']);
 env('key');
 env('key','default');
 ```
+
+### logs
+```
+logs('some msg');//error log
+```
+```
+logs('some msg','warning'); //warning log | support:emergency ,alert ,critical ,error ,warning ,notice ,info ,debug 
+```
