@@ -76,3 +76,7 @@ value = cache('key');
 ```
 cache(['key' => 'value'], 10);
 ``` 
+### view
+```
+echo view('greeting', ['name' => 'James']);
+``` 
