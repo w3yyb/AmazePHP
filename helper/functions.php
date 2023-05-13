@@ -81,6 +81,32 @@ function config($key = null, $default = null)
 }
 
 
+
+function cache()
+    {
+        $arguments = func_get_args();
+
+        $cache= Cache::getInstance();
+
+
+        if (empty($arguments)) {
+            return $cache;
+        }
+
+        if (is_string($arguments[0])) {
+            return $cache->get(...$arguments);
+        }
+
+        if (! is_array($arguments[0])) {
+            throw new InvalidArgumentException(
+                'When setting a value in the cache, you must pass an array of key / value pairs.'
+            );
+        }
+
+        return $cache->put(key($arguments[0]), reset($arguments[0]), $arguments[1] ?? null);
+    }
+
+
 function json2array($json)
 {
     return json_decode($json, true);
