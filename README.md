@@ -15,6 +15,7 @@ It only takes 1 minute to start a project.
 - error handling  
 - Singleton 
 - macroable 
+- cache 
 
 
 ## install:    
@@ -67,4 +68,11 @@ The public directory contains the index.php file, which is the entry point for a
   ]]);
  ``` 
  
-
+### get cache 
+```
+value = cache('key');
+```
+### set cache 
+```
+cache(['key' => 'value'], 10);
+``` 
