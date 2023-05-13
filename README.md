@@ -8,7 +8,7 @@ It only takes 1 minute to start a project.
 - configuration  
 - .env  
 - router    
-- mysql class  
+- database  
 - http client  
 - log   
 - template engine
