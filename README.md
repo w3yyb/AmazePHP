@@ -93,3 +93,39 @@ logs('some msg');//error log
 ```
 logs('some msg','warning'); //warning log | support:emergency ,alert ,critical ,error ,warning ,notice ,info ,debug 
 ```
+### routing 
+see config/route.php
+```
+  [
+        ['GET'],
+        '/',
+        [new App\Index, 'index'],
+    ],
+```
+```
+    [
+        ['POST,GET'],
+        '/hello',
+        function () {
+            echo 'Hello AmazePHP!';
+        },
+    ],
+    ```
+    ```
+     [
+        ['*'],
+        '/users/:uid/posts/[:pid]',
+        function ($uid, $pid = 99) {
+            var_dump($uid, $pid);
+        },
+    ],
+    ```
+    ```
+       [
+        ['GET'],
+        '/a/:uid/b/:pid',
+        ['App\myclass', 'say_hello'],//static method
+    ],
+    ```
+    
+    
