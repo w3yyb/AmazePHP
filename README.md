@@ -16,6 +16,7 @@ It only takes 1 minute to start a project.
 - Singleton 
 - macroable 
 - cache 
+- session 
 
 
 ## install:    
@@ -152,3 +153,14 @@ see config/route.php
         $a= httpPut('http://httpbin.org/put',['aaa'=>'bbb']);
         $a= httpPatch('http://httpbin.org/patch',['aaa'=>'bbb']);
 ```
+### set session
+```
+session([
+            "name" => "value",
+        ]);
+```        
+### get session
+```
+echo session('name')
+```
+
