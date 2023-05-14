@@ -142,4 +142,13 @@ see config/route.php
     ],
 ```
     
-    
+### http client 
+```
+        $a= httpGet('http://httpbin.org/get');
+        $a= httpGet('http://httpbin.org/get',['aaa'=>'bbb']);
+        $a= httpHead('http://httpbin.org/get',['aaa'=>'bbb']);
+        $a= httpDelete('http://httpbin.org/delete',['aaa'=>'bbb']);
+        $a= httpPost('http://httpbin.org/post',['aaa'=>'bbb']);
+        $a= httpPut('http://httpbin.org/put',['aaa'=>'bbb']);
+        $a= httpPatch('http://httpbin.org/patch',['aaa'=>'bbb']);
+```
