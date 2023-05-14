@@ -1,8 +1,8 @@
 <?php
 
-use Monolog\Level;
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
+// use Monolog\Level;
+// use Monolog\Logger;
+// use Monolog\Handler\StreamHandler;
 
 class ErrorHandel
 {
@@ -47,9 +47,9 @@ class ErrorHandel
         set_exception_handler([$this, "exceptionHandler"]);
         register_shutdown_function([$this, "shutdownFunction"]);
 
-        $this->log= new Logger('errorlog');
-        $logfile= BASE_PATH.'/cache/error.log';
-        $this->log->pushHandler(new StreamHandler($logfile, Level::Warning));
+        // $this->log= new Logger('errorlog');
+        // $logfile= BASE_PATH.'/cache/error.log';
+        // $this->log->pushHandler(new StreamHandler($logfile, Level::Warning));
     }
 
     public function shutdownFunction()
@@ -159,7 +159,8 @@ class ErrorHandel
 
     public function logError($err, $level)
     {
-        $this->log->$level($err);
+        // $this->log->$level($err);
+        logs($err,$level);
     }
 
     public function __destruct()
