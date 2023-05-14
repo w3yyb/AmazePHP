@@ -233,3 +233,50 @@ function httpPatch($url, $data, $isJson = true,$method='PATCH',$header = [])
 {
   return  httpSend($url, $data, $isJson ,$method,$header);
 }
+
+/**
+ * @param null $key
+ * @param null $default
+ * @return mixed
+ */
+function session($key = null, $default = null)
+{
+    $session = getSession();
+    if (null === $key) {
+        return $session;
+    }
+    if (\is_array($key)) {
+        $session->put($key);
+        return null;
+    }
+    return $session->get($key, $default);
+}
+
+    /**
+     * Get session.
+     *
+     * @return bool
+     */
+     function getSession()
+    {
+        $session=null;
+        if ($session === null) {
+            $session_id = sessionId();
+            if ($session_id === false) {
+                return false;
+            }
+            $session = Session::getInstance();
+        }
+        return $session;
+    }
+
+
+     /**
+     * Get session id.
+     *
+     * @return bool|mixed
+     */
+     function sessionId()
+    {
+        return  md5(uniqid('', true));
+    }
