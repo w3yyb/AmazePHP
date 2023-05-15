@@ -25,7 +25,7 @@ git clone https://github.com/w3yyb/AmazePHP.git
 composer install  
 
  ## run
- php -S 0.0.0.0:9080  public/index.php  
+ php -S localhost:9080  public/index.php  
  open http://localhost:9080
 
  ## requirements:  
