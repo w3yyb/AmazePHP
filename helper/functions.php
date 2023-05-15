@@ -309,5 +309,5 @@ function route($name, $parameters = [])
     if (!$route) {
         return $name;
     }
-    return $route->url($name,$parameters);
+    return  (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]".$route->url($name,$parameters);
 }
