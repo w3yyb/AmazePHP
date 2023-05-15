@@ -5,7 +5,7 @@ use eftec\bladeone\BladeOne;
 function env($key, $default = null)
 {
     $apcu_key="env$key";
-    if (apcu_exists($apcu_key)) {
+    if (function_exists('apcu_exists') && apcu_exists($apcu_key)) {
         $apcu_value= apcu_fetch($apcu_key);
 
         if ($apcu_value === false) {
@@ -30,7 +30,9 @@ function env($key, $default = null)
     }
 
     $value = getenv($key);
-    apcu_store($apcu_key, $value, 60);
+    if(function_exists('apcu_store')){
+        apcu_store($apcu_key, $value, 60);
+    }
 
     if ($value === false) {
         return $default;
