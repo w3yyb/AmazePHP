@@ -207,3 +207,17 @@ echo url()->previous();
 ```
 echo url("/posts/{$post->id}");
 ```
+#### URLs For Named Routes 
+```
+[
+        ['GET'],
+        '/hello/{id}/foo/{sid}',
+        [new App\Foo, 'bar'],////object, method
+        'nameroute1'//Named Route
+
+],
+
+echo   route('nameroute1', ['id' => 77, 'sid' => 8888]);
+
+// http://example.com/hello/77/foo/8888
+``` 
