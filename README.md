@@ -114,18 +114,18 @@ see config/route.php
     ],
 ```
 ```
-     [
+    [
         ['*'],
-        '/users/:uid/posts/[:pid]',
+        '/users/{uid}/posts/[{pid}]',
         function ($uid, $pid = 99) {
             var_dump($uid, $pid);
         },
     ],
 ```
 ```
-       [
+  [
         ['GET'],
-        '/a/:uid/b/:pid',
+        '/a/{uid}/b/{pid}',
         ['App\myclass', 'say_hello'],//static method
     ],
 ```
@@ -137,10 +137,19 @@ see config/route.php
     ],
 ```
 ```
-  [
+     [
         ['GET'],
-        '/tool-:id[/]',//Remove the trailing slash
+        '/tool-{id}[/]',//Remove the trailing slash
         [new App\Index, 'tool'],
+    ],
+```
+```
+   [
+        ['GET'],
+        '/hello3/{id}/sss/{sid}',
+        [new App\Foo, 'bar'],////object, method
+        'nameroute1'//named route
+
     ],
 ```
     
