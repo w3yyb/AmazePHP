@@ -46,8 +46,13 @@ The helper functions in it.
 The framework core directory, include some lib class. And you can put  your class file in it.
 ### The public Directory
 The public directory contains the index.php file, which is the entry point for all requests entering your application and configures autoloading. This directory also houses your assets such as images, JavaScript, and CSS.
+### The cache Directory
+The cache directory contains your cache files, include log files.
+### The template Directory
+The template directory contains your html template files.
 
- ## usage 
+ # usage 
+## configs
  ### get config  
  ``` 
   config('app'); //will read config/app.php  app.php is return an array.  
@@ -72,7 +77,7 @@ The public directory contains the index.php file, which is the entry point for a
             ['c'=>6],
   ]]);
  ``` 
- 
+## cache  
 ### get cache 
 ```
 value = cache('key');
@@ -166,6 +171,7 @@ see config/route.php
         $a= httpPut('http://httpbin.org/put',['aaa'=>'bbb']);
         $a= httpPatch('http://httpbin.org/patch',['aaa'=>'bbb']);
 ```
+## session 
 ### set session
 ```
 session([
