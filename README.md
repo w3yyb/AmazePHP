@@ -17,6 +17,7 @@ It only takes 1 minute to start a project.
 - macroable 
 - cache 
 - session 
+- URL Generation 
 
 
 ## install:    
@@ -190,4 +191,19 @@ db()->insert("users"
     ,['id'=>6]); // where
 ```
     
-
+### URL
+#### Accessing The Current URL 
+```
+// Get the current URL without the query string...
+echo url()->current();
+ 
+// Get the current URL including the query string...
+echo url()->full();
+ 
+// Get the full URL for the previous request...
+echo url()->previous(); 
+```
+#### Generating URLs
+```
+echo url("/posts/{$post->id}");
+```

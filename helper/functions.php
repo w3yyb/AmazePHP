@@ -287,3 +287,12 @@ function session($key = null, $default = null)
        
         return $db;
     }
+
+    function url($path = null, $parameters = [], $secure = null)
+    {
+        if (is_null($path)) {
+            return UrlGenerator::getInstance();
+        }
+
+        return (UrlGenerator::getInstance())->to($path, $parameters, $secure);
+    }

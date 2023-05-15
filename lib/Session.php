@@ -552,6 +552,12 @@ class Session
         $this->flash('_old_input', $value);
     }
 
+    public function previousUrl()
+    {
+        return $this->get('_previous.url');
+    }
+
+
     /**
      * Init.
      *
