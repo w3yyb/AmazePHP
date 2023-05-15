@@ -2,16 +2,23 @@
 
 class Router
 {
+    use SingletonTrait;
     private $routes = [];
     private $routeCount = 0;
+    protected static $_nameList = [];
+    private $_path = [];
 
-    public function addRoute($method, $url, $callback)
+    public function addRoute($method, $url, $callback, $name = null)
     {
         if ($url !== '/') {//去除url尾部斜杠
             while ($url !== $url = rtrim($url, '/'));//不应该去除url尾部斜杠，以后要改
         }
 
         $this->routes[] = ['method' => $method, 'url' => $url, 'callback' => $callback];
+        $this->name($name);
+        $this->_path[$name]= '/'.ltrim($url, '/');
+
+
         $this->routeCount++;
     }
 
@@ -30,7 +37,7 @@ class Router
         foreach ($this->routes as $route) {
             // convert urls like '/users/:uid/posts/:pid' to regular expression
 
-            $patterns = array('/\[:[a-zA-Z0-9\_\-]+\]/','/:[a-zA-Z0-9\_\-]+/');
+            $patterns = array('/\[{[a-zA-Z0-9\_\-}]+\]/','/{[a-zA-Z0-9\_\-}]+/');
             $replace = array('([a-zA-Z0-9\-\_]*)','([a-zA-Z0-9\-\_]+)');
 
 
@@ -67,6 +74,41 @@ class Router
         if ($is_match == $this->routeCount) {
             throw new Exception("404 Not Found");
         }
+    }
+
+    public function url($name, $parameters = [])
+    {
+
+        $path=$this->_path[$name] ?? $this->_path[0];
+        if (empty($parameters)) {
+            return $path;
+        }
+        return preg_replace_callback('/\{(.*?)(?:\:[^\}]*?)*?\}/', function ($matches) use ($parameters) {
+
+            if (isset($parameters[$matches[1]])) {
+                return $parameters[$matches[1]];
+            }
+            return $matches[0];
+        }, $path);
+    }
+
+
+    public static function getByRouteName($name)
+    {
+        return static::$_nameList[$name] ?? null;
+    }
+
+    public static function setByName($name, $instance)
+    {
+        static::$_nameList[$name] = $instance;
+    }
+
+    public function name($name)
+    {
+        self::setByName($name, $this);
+        // $this->_path[$v[3]]=$v[1];
+        // $this->_path[$routeName.'.show']= '/'.$routePath.'/{'.$id.'}';
+        return $this;
     }
 }
 

@@ -6,9 +6,9 @@ include 'vendor/autoload.php';
 (new ErrorHandel());
 $REQUEST= empty($_REQUEST) ?    file_get_contents("php://input"): $_REQUEST;
 
-$router = new Router();
+$router = Router::getInstance();
 foreach (config('route') as $key => $value) {
-        $router->addRoute($value[0][0], $value[1], $value[2]);
+        $router->addRoute($value[0][0], $value[1], $value[2], $value[3] ?? null);
 }
 
 $router->doRouting();

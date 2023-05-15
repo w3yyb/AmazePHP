@@ -296,3 +296,18 @@ function session($key = null, $default = null)
 
         return (UrlGenerator::getInstance())->to($path, $parameters, $secure);
     }
+
+    /**
+ * @param $name
+ * @param array $parameters
+ * @return string
+ */
+function route($name, $parameters = [])
+{
+    $Route=Router::getInstance();
+    $route = $Route::getByRouteName($name);
+    if (!$route) {
+        return $name;
+    }
+    return $route->url($name,$parameters);
+}

@@ -7,6 +7,13 @@ return [
         '/',
         [new App\Index, 'index'],
     ],
+
+    [
+        ['GET'],
+        '/nav[{navid}].html',
+        [new App\Index, 'nav'],
+    ],
+
     [
         ['GET'],
         '/search',
@@ -15,13 +22,13 @@ return [
 
     [
         ['GET'],
-        '/tool-:id[/]',
+        '/tool-{id}[/]',
         [new App\Index, 'tool'],
     ],
 
     [
         ['GET'],
-        '/tool-:id',
+        '/tool-{id}',
         [new App\Index, 'tool'],
     ],
 
@@ -29,7 +36,15 @@ return [
 
     [
         ['GET'],
-        '/category-:cid.html',
+        '/navshow/{navid}/{id}/{id2}/{id3}',
+        [new App\Index, 'navshow'],
+    ],
+
+
+
+    [
+        ['GET'],
+        '/category-{cid}.html',
         [new App\Index, 'category'],
 
     ],
@@ -59,13 +74,15 @@ return [
 
     [
         ['GET'],
-        '/hello3/:id',
+        '/hello3/{id}/sss/{sid}',
         [new App\Foo, 'bar'],////object, method
+        'hahahayyy'//命名路由
+
     ],
 
     [
         ['GET'],
-        '/a/:uid/b/:pid',
+        '/a/{uid}/b/{pid}',
         ['App\myclass', 'say_hello'],//static method
     ],
 
@@ -79,7 +96,7 @@ return [
 
     [
         ['*'],
-        '/users/:uid/posts/[:pid]',
+        '/users/{uid}/posts/[{pid}]',
         function ($uid, $pid = 99) {
             var_dump($uid, $pid);
         },
