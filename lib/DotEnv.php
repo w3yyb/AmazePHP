@@ -66,6 +66,8 @@ class DotEnv
                 continue;
             }
 
+            $line  =trim($line);
+
             list($name, $value) = explode('=', $line, 2);
             $name = trim($name);
             $value = $this->processValue($value);

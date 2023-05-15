@@ -16,7 +16,8 @@
       "monolog/monolog": "^3.3",
       "eftec/bladeone": "^4.9",
       "spatie/macroable": "^2.0",
-      "eftec/cacheone": "^2.16"
+      "eftec/cacheone": "^2.16",
+    "eftec/pdoone": "^4.2"
   },
   "autoload": {
       "psr-4": {

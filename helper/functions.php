@@ -280,3 +280,10 @@ function session($key = null, $default = null)
     {
         return  md5(uniqid('', true));
     }
+
+    function db()
+    {
+        $db=DB::getInstance();
+       
+        return $db;
+    }
