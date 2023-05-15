@@ -164,3 +164,30 @@ session([
 echo session('name')
 ```
 
+###  database
+```
+$results = db()->select("*")->from('users')->where("name like '%test%'")->toList();
+
+var_dump($results);
+``` 
+```
+$sql='select * from users where id=1';
+$pdoStatement=db()->runRawQuery($sql,[],false);  // [] are the parameters
+var_dump($pdoStatement->fetchAll());
+```
+```
+db()->insert("users"
+    ,['name','email','password']
+    ,['kevin','email@email.com','9999999']);
+```
+```
+    db()->update("users"
+    ,['name'=>'Captain-Crunch','email'=>'mail@mail.com'] // set
+    ,['id'=>6]); // where
+```
+```
+ db()->delete("users"
+    ,['id'=>6]); // where
+```
+    
+
