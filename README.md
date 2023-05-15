@@ -61,10 +61,10 @@ The template directory contains your html template files.
   
  ### set config 
  ``` 
- config(['sample.haha' =>'6666']);
+ config(['sample.book' =>'6666']);
 ``` 
 ``` 
- config(['sample.hahahaha' =>[
+ config(['sample.users' =>[
         ['a'=>4],
         ['b'=>5],
         ['c'=>6],
@@ -80,15 +80,15 @@ The template directory contains your html template files.
 ## cache  
 ### get cache 
 ```
-value = cache('key');
+$value = cache('key');
 ```
 ### set cache 
 ```
-cache(['key' => 'value'], 10);
+cache(['key' => 'value'], 10);// Expires after 10 seconds
 ``` 
 ### view
 ```
-echo view('greeting', ['name' => 'James']);
+echo view('greeting', ['name' => 'James']);//  template/greeting.blade.php   ['name' => 'James'] is the variable passed.
 ``` 
 ###  get env
 ```
