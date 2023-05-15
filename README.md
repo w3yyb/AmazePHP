@@ -25,9 +25,11 @@ git clone https://github.com/w3yyb/AmazePHP.git
 composer install  
 
  ## run
- cd public/
- php -S localhost:9080 server.php
- open http://localhost:9080
+ ```
+ cd public/  
+ php -S localhost:9080 server.php  
+ ```
+ open http://localhost:9080  
 
  ## requirements:  
  php 8.1  
