@@ -18,6 +18,7 @@ Native PHP first ，Lowest learning curve.
 - macroable 
 - cache 
 - session 
+- cookie 
 - URL Generation 
 
 
@@ -182,6 +183,15 @@ session([
 ### get session
 ```
 echo session('name')
+```
+## cookie 
+### get cookie
+```
+echo $_COOKIE['name'];
+```
+### set cookie 
+```
+cookie('name','value',86400); // 86400 seconds
 ```
 
 ###  database

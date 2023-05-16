@@ -309,7 +309,7 @@ function route($name, $parameters = [])
     return  (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]".$route->url($name,$parameters);
 }
 
-function cookie($name, $value = '', $max_age = 0, $path = '', $domain = '', $secure = false, $http_only = false)
+function cookie($name, $value = '', $max_age = 0, $path = '/', $domain = '', $secure = false, $http_only = false)
 {
     if (!headers_sent()) {
         setcookie($name, $value, $max_age +time(), $path, $domain, $secure, $http_only);
