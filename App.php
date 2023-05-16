@@ -1,9 +1,11 @@
 <?php
 define('BASE_PATH', __DIR__);
-
-include 'vendor/autoload.php';
+include 'lib/DotEnv.php';
+include 'lib/ErrorHandel.php';
 (new DotEnv());
 (new ErrorHandel());
+
+include 'vendor/autoload.php';
 $REQUEST= empty($_REQUEST) ?    file_get_contents("php://input"): $_REQUEST;
 
 $router = Router::getInstance();
