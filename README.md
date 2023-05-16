@@ -1,7 +1,8 @@
 # AmazePHP
 ## AmazePHP  
-A good choice for starting a PHP small project, especially for APIs.   
-It only takes 1 minute to start a project.
+A good choice for starting a PHP  project, it can be used for web and API development.   
+It only takes ONE minute to start a project.  
+It has super high performance, and a very easy to use development experience.  
 
 
 ## features:  
@@ -29,7 +30,7 @@ composer install
  cd public/  
  php -S localhost:9080 server.php  
  ```
- open http://localhost:9080  
+ open http://localhost:9080  in your browser.
 
  ## requirements:  
  php 8.1  
