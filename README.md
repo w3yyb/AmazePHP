@@ -3,7 +3,7 @@
 A good choice for starting a PHP  project, it can be used for web and API development.   
 It only takes ONE minute to start a project.  
 It has super high performance, and a very easy to use development experience.  
-
+Native PHP first ，Lowest learning curve.  
 
 ## features:  
 - configuration  
