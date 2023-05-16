@@ -97,9 +97,6 @@ class UrlGenerator
 
 
         [$path, $query] = $this->extractQueryString($path);
-        // $path = $_SERVER['REQUEST_URI'];
-        // $path= strtok($path, '?');
-        // $query =  ''; //TODO
 
         return $this->format(
             $root, '/'.trim($path.'/'.$tail, '/')
@@ -122,14 +119,6 @@ class UrlGenerator
     public function format($root, $path, $route = null)
     {
         $path = '/'.trim($path, '/');
-
-        // if ($this->formatHostUsing) {
-        //     $root = call_user_func($this->formatHostUsing, $root, $route);
-        // }
-
-        // if ($this->formatPathUsing) {
-        //     $path = call_user_func($this->formatPathUsing, $path, $route);
-        // }
 
         return trim($root.$path, '/');
     }

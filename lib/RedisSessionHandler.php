@@ -1,5 +1,4 @@
 <?php
-// namespace WondPHP\Http\Protocols\Session;
 
 /**
  * Class RedisSessionHandler

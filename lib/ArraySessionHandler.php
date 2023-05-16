@@ -1,9 +1,5 @@
 <?php
 
-// namespace WondPHP\Http\Protocols\Session;
-
-
-// use WondPHP\Http\Protocols\Session\InteractsWithTime;
 use SessionHandlerInterface;
 
 class ArraySessionHandler implements SessionHandlerInterface

@@ -10,8 +10,8 @@ class Router
 
     public function addRoute($method, $url, $callback, $name = null)
     {
-        if ($url !== '/') {//去除url尾部斜杠
-            while ($url !== $url = rtrim($url, '/'));//不应该去除url尾部斜杠，以后要改
+        if ($url !== '/') {//Remove the trailing slash of the URL
+            while ($url !== $url = rtrim($url, '/'));//The trailing slash of the URL should not be removed, it should be changed later
         }
 
         $this->routes[] = ['method' => $method, 'url' => $url, 'callback' => $callback];
@@ -106,8 +106,6 @@ class Router
     public function name($name)
     {
         self::setByName($name, $this);
-        // $this->_path[$v[3]]=$v[1];
-        // $this->_path[$routeName.'.show']= '/'.$routePath.'/{'.$id.'}';
         return $this;
     }
 }

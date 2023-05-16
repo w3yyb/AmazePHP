@@ -1,8 +1,5 @@
 <?php
 
-// namespace WondPHP\Http\Protocols;
-// use Illuminate\Support\Arr;
-// use Illuminate\Support\Str;
 /**
  * Class Session
  *
@@ -84,7 +81,6 @@ class Session
     public function __construct()
     {
 
-        // var_dump($this->_sessionId);
 
         $session_id = session_id();
         if (empty($session_id)) {
@@ -106,9 +102,6 @@ class Session
 
     function sessionId()
     {
-
-
-        // return  md5(uniqid('', true));
 
         if (!isset($this->_data['sid'])) {
             $session_name = 'PHPSID';

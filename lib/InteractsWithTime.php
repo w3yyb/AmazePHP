@@ -1,6 +1,5 @@
 <?php
 
-// namespace WondPHP\Http\Protocols\Session;
 
 use DateInterval;
 use DateTimeInterface;
