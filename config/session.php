@@ -2,17 +2,10 @@
  
 
 return [
-// \FileSessionHandler::class 或者 \RedisSessionHandler::class 或者 \RedisClusterSessionHandler::class 
- 
-// handler为\FileSessionHandler::class时值为file，  
-//ArraySessionHandler
-//NullSessionHandler
-// handler为\RedisSessionHandler::class时值为redis
-// handler为\RedisClusterSessionHandler::class时值为redis_cluster 既redis集群
-    'type'    => 'file', // or redis or redis_cluster  or file  or null  or array
+    'type'    => 'file', // or redis   or file  or null  or array
 
-    'handler' => FileSessionHandler::class,
-// 不同的handler使用不同的配置
+    'handler' => FileSessionHandler::class, //FileSessionHandler::class or ArraySessionHandler::class or NullSessionHandler::class or RedisSessionHandler::class
+// Different handlers use different configurations
     'config' => [
         'array'=>['minutes'=>20],
         'null'=>[],
@@ -36,7 +29,7 @@ return [
     ],
 
     'session_name' => 'PHPSID',
-    'lifetime'=>120,// 分钟
+    'lifetime'=>120,// minute
 
 
 

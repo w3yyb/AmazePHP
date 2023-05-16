@@ -78,10 +78,6 @@ function view($view = null, $data = [])
 function config($key = null, $default = null)
 {
     $config= LoadConfiguration::getInstance();
-    // var_dump($config);
-
-    // global $config;
-    // debug_print_backtrace();
     if (is_null($key)) {
         return  $config;
     }
@@ -149,14 +145,13 @@ function logs($msg, $type='error')
 
 
 /**
- * 该函数使用 PHP 中的 GuzzleHttp 库执行 HTTP 请求，并返回响应状态代码、正文和标头。
+ * The function executes an HTTP request using the GuzzleHttp library in PHP and returns a response status code, body, and headers.
  * 
- * @param url 您要发出的 HTTP 请求的 URL。
- * @param method 用于请求的 HTTP 方法。它可以是 GET、HEAD 或 DELETE。默认情况下，它设置为 GET。
- * @param header 与请求一起发送的可选标头数组。
+ * @param url The URL of the HTTP request you want to make.
+ * @param method The HTTP method used for the request. It can be GET、HEAD or DELETE. By default, it is set to GET.
+ * @param header An array of optional headers sent with the request.
  * 
- * @return 包含三个元素的数组：“status_code”、“body”和“header”。 'status_code' 元素包含响应的 HTTP 状态代码，'body'
- * 元素包含作为字符串的响应正文，'header' 元素包含响应标头的数组。
+ * @return An array containing three elements: "status_code", "body", and "header".  The 'status_code' element contains the HTTP status code of the response, 'body' element contains the response body as a string, and the 'header' element contains an array of response headers.
  */
 function httpRequest($url, $method = 'GET', $header = [])
 {
@@ -189,8 +184,8 @@ function httpDelete($url,$header = [])
 }
 
 
-/* 此函数使用指定的方法（POST、PUT 或 PATCH）和数据向指定的 URL 发送 HTTP 请求。数据可以作为 JSON
-或常规格式数据发送。该函数以数组形式返回响应状态代码、正文和标头。标头参数是可选的，可用于随请求发送其他标头。 */
+/* This function uses the specified method (POST, PUT, or PATCH) and data to send an HTTP request to the specified URL. The data can be used as JSON
+or regular format data sending. The function returns the response status code, body, and headers as an array. Header parameters are optional and can be used to send additional headers with the request. */
 function httpSend($url, $data, $isJson = true,$method='POST',$header = [])
 {
     $client = new \GuzzleHttp\Client();
@@ -312,4 +307,51 @@ function route($name, $parameters = [])
         return $name;
     }
     return  (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]".$route->url($name,$parameters);
+}
+
+function cookie($name, $value = '', $max_age = 0, $path = '', $domain = '', $secure = false, $http_only = false)
+{
+    if (!headers_sent()) {
+        setcookie($name, $value, $max_age +time(), $path, $domain, $secure, $http_only);
+    }
+}
+
+
+/**
+ * @param $data
+ * @param int $options
+ * @return Response
+ */
+function json($data, $options = JSON_UNESCAPED_UNICODE)
+{
+    header('Content-Type: application/json');
+    return json_encode($data, $options);
+}
+
+/**
+ * @param $xml
+ * @return Response
+ */
+function xml($xml)
+{
+    if ($xml instanceof SimpleXMLElement) {
+        $xml = $xml->asXML();
+    }
+    header('Content-Type: text/xml');
+    return  $xml;
+}
+
+function jsonp($data, $callback_name = 'callback')
+{
+    if (!\is_scalar($data) && null !== $data) {
+        $data = json_encode($data);
+    }
+    header('Content-Type: application/javascript');
+    return "$callback_name($data)";
+}
+
+
+function redirect($location, $status = 302, $headers = [])
+{
+    header('Location: ' . $location, true, $status);
 }
