@@ -109,7 +109,7 @@ see config/route.php
 ```
 The first line is the HTTP request method, which supports HEAD, GET, POST, PUT, PATCH, DELETE. `['POST,GET']` means that both POST and GET are supported. `['*']` indicates that all HTTP methods are supported.  
 
-The second line represents the path, like `/users/{uid}/posts/[{pid}][/]`: variable parameters in curly braces, optional parameters in brackets, i.e. parameters that are not passed in the URL, `[/]` for Remove the trailing slash.  
+The second line represents the path, like `/users/{uid}/posts/[{pid}][/]`:  in curly braces is variable parameters , optional parameters in brackets, i.e. parameters that have not passed in the URL, `[/]` for remove the trailing slash.  
 
 The third line indicates PHP callbacks, support for object methods, static methods of classes, anonymous functions, functions, etc. 
 
@@ -146,27 +146,32 @@ $value = $_COOKIE['name'];
 cookie('name','value',86400); // 86400 seconds
 ```
 
-###  database
+###  Database
+select 
 ```
 $results = db()->select("*")->from('users')->where("name like '%test%'")->toList();
 
 var_dump($results);
 ``` 
+use Raw Sql 
 ```
 $sql='select * from users where id=1';
 $pdoStatement=db()->runRawQuery($sql,[],false);  // [] are the parameters
 var_dump($pdoStatement->fetchAll());
 ```
+inset 
 ```
 db()->insert("users"
     ,['name','email','password']
-    ,['kevin','email@email.com','9999999']);
+    ,['kevin','email@email.com','123456']);
 ```
+update 
 ```
     db()->update("users"
     ,['name'=>'Captain-Crunch','email'=>'mail@mail.com'] // set
     ,['id'=>6]); // where
 ```
+delete 
 ```
  db()->delete("users"
     ,['id'=>6]); // where
