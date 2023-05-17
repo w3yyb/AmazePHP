@@ -157,13 +157,13 @@ select
 ```
 $results = db()->select("*")->from('users')->where("name like '%test%'")->toList();
 
-var_dump($results);
+pring_r($results);
 ``` 
 use Raw Sql 
 ```
 $sql='select * from users where id=1';
 $pdoStatement=db()->runRawQuery($sql,[],false);  // [] are the parameters
-var_dump($pdoStatement->fetchAll());
+pring_r($pdoStatement->fetchAll());
 ```
 inset 
 ```
@@ -173,14 +173,14 @@ db()->insert("users"
 ```
 update 
 ```
-    db()->update("users"
-    ,['name'=>'Captain-Crunch','email'=>'mail@mail.com'] // set
-    ,['id'=>6]); // where
+db()->update("users"
+,['name'=>'Captain-Crunch','email'=>'mail@mail.com'] // set
+,['id'=>6]); // where
 ```
 delete 
 ```
- db()->delete("users"
-    ,['id'=>6]); // where
+db()->delete("users"
+  ,['id'=>6]); // where
 ```
     
 ### URL
@@ -198,7 +198,6 @@ echo url()->previous();
 #### Generating URLs
 ```
 echo url("/posts/{$post->id}"); // http://example.com/posts/1
-
 ```
 #### URLs For Named Routes 
 ```
