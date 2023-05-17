@@ -57,28 +57,19 @@ The template directory contains your html template files.
 ## Configuration 
  ### get config  
  ``` 
-  config('app'); //will read config/app.php  app.php is return an array.  
+  config('app'); //will read config/app.php,  app.php return an array.  
   config('app.url')// == config('app')['url'];  
+  // Retrieve a default value if the configuration value does not exist...
+  $value = config('app.timezone', 'Asia/Seoul');
   ``` 
   
  ### set config 
+ To set configuration values at runtime, pass an array to the config function:
  ``` 
- config(['sample.book' =>'6666']);
+config(['app.timezone' => 'America/Chicago']);
 ``` 
-``` 
- config(['sample.users' =>[
-        ['a'=>4],
-        ['b'=>5],
-        ['c'=>6],
- ]]);
-``` 
- ``` 
- config(['sample' =>[
-            ['a'=>4],
-            ['b'=>5],
-            ['c'=>6],
-  ]]);
- ``` 
+ 
+ 
 ## Cache  
 ### get cache 
 ```
@@ -95,8 +86,9 @@ echo view('greeting', ['name' => 'James']);//  template/greeting.blade.php   ['n
 ###  get env 
 ```
 env('key');
-env('key','default');
+env('key','default'); 
 ```
+The second value passed to the env function is the "default value". This value will be returned if no environment variable exists for the given key.
 
 ### Logging
 ```
@@ -109,59 +101,21 @@ logs('some msg','warning'); //warning log | support:emergency ,alert ,critical ,
 see config/route.php
 ```
   [
-        ['GET'],
-        '/',
-        [new App\Index, 'index'],//object method
-    ],
+        ['GET'], 
+        '/',  
+        [new App\Index, 'index'],
+        ['routename']
+  ],
 ```
-```
-    [
-        ['POST,GET'],
-        '/hello',
-        function () {
-            echo 'Hello AmazePHP!';
-        },
-    ],
-```
-```
-    [
-        ['*'],
-        '/users/{uid}/posts/[{pid}]',
-        function ($uid, $pid = 99) {
-            var_dump($uid, $pid);
-        },
-    ],
-```
-```
-  [
-        ['GET'],
-        '/a/{uid}/b/{pid}',
-        ['App\myclass', 'say_hello'],//static method
-    ],
-```
-```
- [
-        ['GET'],
-        '/hello2',
-        'callbackFunction',
-    ],
-```
-```
-     [
-        ['GET'],
-        '/tool-{id}[/]',//Remove the trailing slash
-        [new App\Index, 'tool'],
-    ],
-```
-```
-   [
-        ['GET'],
-        '/hello3/{id}/sss/{sid}',
-        [new App\Foo, 'bar'],////object, method
-        'nameroute1'//named route
+The first line is the HTTP request method, which supports HEAD, GET, POST, PUT, PATCH, DELETE. `['POST,GET']` means that both POST and GET are supported. `['*']` indicates that all HTTP methods are supported.  
 
-    ],
-```
+The second line represents the path, like `/users/{uid}/posts/[{pid}][/]`: variable parameters in curly braces, optional parameters in brackets, i.e. parameters that are not passed in the URL, `[/]` for Remove the trailing slash.  
+
+The third line indicates PHP callbacks, support for object methods, static methods of classes, anonymous functions, functions, etc. 
+
+The fourth line is optional and indicates the name of the named route. 
+
+
     
 ### http client 
 ```
@@ -176,18 +130,16 @@ see config/route.php
 ## session 
 ### set session
 ```
-session([
-            "name" => "value",
-        ]);
+session(["name" => "value"]);
 ```        
 ### get session
 ```
-echo session('name')
+$value = session('name')
 ```
 ## cookie 
 ### get cookie
 ```
-echo $_COOKIE['name'];
+$value = $_COOKIE['name'];
 ```
 ### set cookie 
 ```
@@ -234,19 +186,19 @@ echo url()->previous();
 ```
 #### Generating URLs
 ```
-echo url("/posts/{$post->id}");
+echo url("/posts/{$post->id}"); // http://example.com/posts/1
+
 ```
 #### URLs For Named Routes 
 ```
 [
         ['GET'],
         '/hello/{id}/foo/{sid}',
-        [new App\Foo, 'bar'],////object, method
+        [new App\Foo, 'bar'],
         'nameroute1'//Named Route
-
 ],
 
-echo   route('nameroute1', ['id' => 77, 'sid' => 8888]);
+echo   route('nameroute1', ['id' => 1, 'sid' => 2]);
 
-// http://example.com/hello/77/foo/8888
+// http://example.com/hello/1/foo/2
 ``` 
