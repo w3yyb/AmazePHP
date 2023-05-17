@@ -86,8 +86,9 @@ cache(['key' => 'value'], 10);// Expires after 10 seconds
 ``` 
 ### view 
 ```
-echo view('greeting', ['name' => 'James']);//  template/greeting.blade.php   ['name' => 'James'] is the variable passed.
+echo view('greeting', ['name' => 'James']);
 ``` 
+The first parameter is the template name, i.e. `template/greeting.blade.php` , and the second parameter is the variable passed into the template. 
 ###  get env 
 ```
 env('key');
@@ -125,13 +126,13 @@ The fourth line is optional and indicates the name of the named route.
     
 ### http client 
 ```
-        $a= httpGet('http://httpbin.org/get');
-        $a= httpGet('http://httpbin.org/get',['aaa'=>'bbb']);
-        $a= httpHead('http://httpbin.org/get',['aaa'=>'bbb']);
-        $a= httpDelete('http://httpbin.org/delete',['aaa'=>'bbb']);
-        $a= httpPost('http://httpbin.org/post',['aaa'=>'bbb']);
-        $a= httpPut('http://httpbin.org/put',['aaa'=>'bbb']);
-        $a= httpPatch('http://httpbin.org/patch',['aaa'=>'bbb']);
+$a= httpGet('http://httpbin.org/get');
+$a= httpGet('http://httpbin.org/get',['aaa'=>'bbb']);
+$a= httpHead('http://httpbin.org/get',['aaa'=>'bbb']);
+$a= httpDelete('http://httpbin.org/delete',['aaa'=>'bbb']);
+$a= httpPost('http://httpbin.org/post',['aaa'=>'bbb']);
+$a= httpPut('http://httpbin.org/put',['aaa'=>'bbb']);
+$a= httpPatch('http://httpbin.org/patch',['aaa'=>'bbb']);
 ```
 ## session 
 ### set session
@@ -167,7 +168,7 @@ $pdoStatement=db()->runRawQuery($sql,[],false);  // [] are the parameters
 
 print_r($pdoStatement->fetchAll());
 ```
-inset 
+insert 
 ```
 db()->insert("users"
     ,['name','email','password']
