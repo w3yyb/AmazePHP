@@ -21,15 +21,17 @@ Native PHP first ，Lowest learning curve.
 
 
 ## install:    
+```
 git clone https://github.com/w3yyb/AmazePHP.git  
-composer install  
 
+composer install  
+```
  ## run
  ```
  cd public/  
  php -S localhost:9080 server.php  
  ```
- open http://localhost:9080  in your browser.
+ Open http://localhost:9080  in your browser.
 
  ## requirements:  
  php 8.1  
@@ -51,8 +53,8 @@ The cache directory contains your cache files, include log files.
 ### The template Directory
 The template directory contains your html template files.
 
- # usage 
-## configs
+ # Usage 
+## Configuration 
  ### get config  
  ``` 
   config('app'); //will read config/app.php  app.php is return an array.  
@@ -77,7 +79,7 @@ The template directory contains your html template files.
             ['c'=>6],
   ]]);
  ``` 
-## cache  
+## Cache  
 ### get cache 
 ```
 $value = cache('key');
@@ -86,24 +88,24 @@ $value = cache('key');
 ```
 cache(['key' => 'value'], 10);// Expires after 10 seconds
 ``` 
-### view
+### view 
 ```
 echo view('greeting', ['name' => 'James']);//  template/greeting.blade.php   ['name' => 'James'] is the variable passed.
 ``` 
-###  get env
+###  get env 
 ```
 env('key');
 env('key','default');
 ```
 
-### logs
+### Logging
 ```
 logs('some msg');//error log
 ```
 ```
 logs('some msg','warning'); //warning log | support:emergency ,alert ,critical ,error ,warning ,notice ,info ,debug 
 ```
-### routing 
+### Routing 
 see config/route.php
 ```
   [
