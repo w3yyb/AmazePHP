@@ -24,11 +24,14 @@ Native PHP first ，Lowest learning curve.
 ```
 git clone https://github.com/w3yyb/AmazePHP.git  
 
+cd AmazePHP 
+
 composer install  
 ```
  ## run
  ```
  cd public/  
+
  php -S localhost:9080 server.php  
  ```
  Open http://localhost:9080  in your browser.
@@ -58,7 +61,9 @@ The template directory contains your html template files.
  ### get config  
  ``` 
   config('app'); //will read config/app.php,  app.php return an array.  
+
   config('app.url')// == config('app')['url'];  
+
   // Retrieve a default value if the configuration value does not exist...
   $value = config('app.timezone', 'Asia/Seoul');
   ``` 
@@ -86,6 +91,7 @@ echo view('greeting', ['name' => 'James']);//  template/greeting.blade.php   ['n
 ###  get env 
 ```
 env('key');
+
 env('key','default'); 
 ```
 The second value passed to the env function is the "default value". This value will be returned if no environment variable exists for the given key.
