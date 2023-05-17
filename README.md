@@ -157,13 +157,15 @@ select
 ```
 $results = db()->select("*")->from('users')->where("name like '%test%'")->toList();
 
-pring_r($results);
+print_r($results);
 ``` 
 use Raw Sql 
 ```
 $sql='select * from users where id=1';
+
 $pdoStatement=db()->runRawQuery($sql,[],false);  // [] are the parameters
-pring_r($pdoStatement->fetchAll());
+
+print_r($pdoStatement->fetchAll());
 ```
 inset 
 ```
