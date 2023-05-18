@@ -126,13 +126,25 @@ The fourth line is optional and indicates the name of the named route.
     
 ### http client 
 ```
-$a= httpGet('http://httpbin.org/get');
-$a= httpGet('http://httpbin.org/get',['aaa'=>'bbb']);
-$a= httpHead('http://httpbin.org/get',['aaa'=>'bbb']);
-$a= httpDelete('http://httpbin.org/delete',['aaa'=>'bbb']);
-$a= httpPost('http://httpbin.org/post',['aaa'=>'bbb']);
-$a= httpPut('http://httpbin.org/put',['aaa'=>'bbb']);
-$a= httpPatch('http://httpbin.org/patch',['aaa'=>'bbb']);
+$response= httpGet('http://httpbin.org/get');
+$response= httpGet('http://httpbin.org/get',['headername'=>'headervalue']);
+$response= httpHead('http://httpbin.org/get',['headername'=>'headervalue']);
+$response= httpDelete('http://httpbin.org/delete',['headername'=>'headervalue']);
+$response= httpPost('http://httpbin.org/post',['senddataname'=>'senddatavalue']);
+$response= httpPut('http://httpbin.org/put',['senddataname'=>'senddatavalue']);
+$response= httpPatch('http://httpbin.org/patch',['senddataname'=>'senddatavalue']);
+```
+$response is an array containing status_code, header, and body data.  
+
+The function parameters are as follows: 
+```
+httpGet($url,$header = [])
+httpHead($url,$header = [])
+httpDelete($url,$header = [])
+
+httpPost($url, $data, $isJson = true,$method='POST',$header = [])
+httpPut($url, $data, $isJson = true,$method='PUT',$header = [])
+httpPatch($url, $data, $isJson = true,$method='PATCH',$header = [])
 ```
 ## session 
 ### set session
