@@ -121,9 +121,10 @@ class VerifyCsrfToken
 
         $token = !empty($_POST['_token']) ?$_POST['_token'] :  get_all_headers()['x-csrf-token'] ?? null;
 
-        if (! $token && $header = get_all_headers()['x-xsrf-token'] ?? null) {//TODO
+        if (! $token && $header = get_all_headers()['x-xsrf-token'] ?? null) {
             try {
-                $token = CookieValuePrefix::remove($this->encrypter->decrypt($header, static::serialized()));
+                // $token = CookieValuePrefix::remove($this->encrypter->decrypt($header, static::serialized()));
+                $token = $header;
             } catch (DecryptException $e) {
                 $token = '';
             }

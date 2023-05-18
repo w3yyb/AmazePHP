@@ -12,12 +12,11 @@ $reqMet = $_SERVER['REQUEST_METHOD'];
 
 if (config('session.enable')){
         getSession();
+        cookie('XSRF-TOKEN', session()->token(),  config('session.lifetime'),config('session.path'), config('session.domain'), config('session.secure'), false, config('session.same_site'));
 }
 
 
 if (config('session.enable') && $reqMet=='POST'  || $reqMet=='PUT' || $reqMet=='DELETE' || $reqMet=='PATCH') {
-        cookie('XSRF-TOKEN', session()->token(),  config('session.lifetime'),config('session.path'), config('session.domain'), config('session.secure'), false, config('session.same_site'));
-
         VerifyCsrfToken::getInstance();
 }
 
