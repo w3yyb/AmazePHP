@@ -18,6 +18,7 @@ Native PHP first ，Lowest learning curve.
 - Session 
 - Cookie 
 - URL Generation 
+- CSRF Protection 
 
 
 ## install:    
