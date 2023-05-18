@@ -1,8 +1,8 @@
 <?php
 
 
-use DateInterval;
-use DateTimeInterface;
+use DateInterval as DateInterval;
+use DateTimeInterface as DateTimeInterface;
 
 trait InteractsWithTime
 {

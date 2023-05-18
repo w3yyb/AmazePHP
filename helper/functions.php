@@ -309,13 +309,97 @@ function route($name, $parameters = [])
     return  (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]".$route->url($name,$parameters);
 }
 
-function cookie($name, $value = '', $max_age = 0, $path = '/', $domain = '', $secure = false, $http_only = false)
+function cookie($name, $value = '', $max_age = 0, $path = '/', $domain = '', $secure = false, $http_only = false, $samesite='None')
 {
     if (!headers_sent()) {
-        setcookie($name, $value, $max_age +time(), $path, $domain, $secure, $http_only);
+        $arr_cookie_options = array (
+            'expires' =>$max_age +time(), 
+            'path' => $path, 
+            'domain' => $domain,
+            'secure' => $secure, 
+            'httponly' => $http_only,
+            'samesite' => $samesite // None || Lax  || Strict
+            );
+        // setcookie($name, $value, $max_age +time(), $path, $domain, $secure, $http_only);
+        setcookie($name, $value, $arr_cookie_options);
     }
 }
 
+
+
+if (! function_exists('csrf_field')) {
+    /**
+     * Generate a CSRF token form field.
+     *
+     * @return \Illuminate\Support\HtmlString
+     */
+    function csrf_field()
+    {
+        return new HtmlString('<input type="hidden" name="_token" value="'.csrf_token().'">');
+    }
+}
+
+if (! function_exists('csrf_token')) {
+    /**
+     * Get the CSRF token value.
+     *
+     * @return string
+     *
+     * @throws \RuntimeException
+     */
+    function csrf_token()
+    {
+        $session =  getSession();
+
+        if (isset($session)) {
+            return $session->token();
+        }
+
+        throw new RuntimeException('Application session store not set.');
+    }
+}
+
+
+/**
+     * Get all HTTP header key/values as an associative array for the current request.
+     *
+     * @return string[string] The HTTP header key/value pairs.
+     */
+    function get_all_headers()
+    {
+        $headers = array();
+
+        $copy_server = array(
+            'CONTENT_TYPE'   => 'Content-Type',
+            'CONTENT_LENGTH' => 'Content-Length',
+            'CONTENT_MD5'    => 'Content-Md5',
+        );
+
+        foreach ($_SERVER as $key => $value) {
+            if (substr($key, 0, 5) === 'HTTP_') {
+                $key = substr($key, 5);
+                if (!isset($copy_server[$key]) || !isset($_SERVER[$key])) {
+                    $key = str_replace(' ', '-', strtolower(str_replace('_', ' ', $key)));
+                    $headers[$key] = $value;
+                }
+            } elseif (isset($copy_server[$key])) {
+                $headers[$copy_server[$key]] = $value;
+            }
+        }
+
+        if (!isset($headers['Authorization'])) {
+            if (isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])) {
+                $headers['Authorization'] = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
+            } elseif (isset($_SERVER['PHP_AUTH_USER'])) {
+                $basic_pass = isset($_SERVER['PHP_AUTH_PW']) ? $_SERVER['PHP_AUTH_PW'] : '';
+                $headers['Authorization'] = 'Basic ' . base64_encode($_SERVER['PHP_AUTH_USER'] . ':' . $basic_pass);
+            } elseif (isset($_SERVER['PHP_AUTH_DIGEST'])) {
+                $headers['Authorization'] = $_SERVER['PHP_AUTH_DIGEST'];
+            }
+        }
+
+        return $headers;
+    }
 
 /**
  * @param $data

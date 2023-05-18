@@ -1,7 +1,7 @@
 <?php
 
 
-use Closure;
+use Closure as Closure;
 // use JsonException;
 
 // use League\CommonMark\Environment\Environment;
@@ -16,7 +16,7 @@ use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidFactory;
 
 // use Symfony\Component\Uid\Ulid;
-use Traversable;
+use Traversable as Traversable;
 // use voku\helper\ASCII;
 
 class Str

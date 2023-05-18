@@ -8,6 +8,19 @@ include 'lib/ErrorHandel.php';
 include 'vendor/autoload.php';
 $REQUEST= empty($_REQUEST) ?    file_get_contents("php://input"): $_REQUEST;
 
+$reqMet = $_SERVER['REQUEST_METHOD'];
+
+if (config('session.enable')){
+        getSession();
+}
+
+
+if (config('session.enable') && $reqMet=='POST'  || $reqMet=='PUT' || $reqMet=='DELETE' || $reqMet=='PATCH') {
+        cookie('XSRF-TOKEN', session()->token(),  config('session.lifetime'),config('session.path'), config('session.domain'), config('session.secure'), false, config('session.same_site'));
+
+        VerifyCsrfToken::getInstance();
+}
+
 $router = Router::getInstance();
 foreach (config('route') as $key => $value) {
         $router->addRoute($value[0][0], $value[1], $value[2], $value[3] ?? null);

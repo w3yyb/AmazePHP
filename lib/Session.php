@@ -103,31 +103,55 @@ class Session
     function sessionId()
     {
 
+        
+
+
         if (!isset($this->_data['sid'])) {
+
+          
+
+
             $session_name = 'PHPSID';
             // $sid = $this->cookie($session_name);
             $sid =  $_COOKIE[$session_name] ?? null;
 
 
-            if ($sid === '' || $sid === null) {
+         //   if ($sid === '' || $sid === null) {
+
+                if (empty($sid) && ! $this->has('_token')) {
+                    $this->regenerateToken();
+                }
                 if (0) {
                     echo('Request->session() fail, header already send');
                     return false;
                 }
                 // $sid = static::createSessionId();
-                $sid =  session_create_id();
+                $sid =    $sid ?? session_create_id();
                 $cookie_params = \session_get_cookie_params();
                 $lifetime =config('session.lifetime') ??$cookie_params['lifetime'] ;
 
-                $header= array($session_name . '=' . $sid
+                if (config('session.expire_on_close')) {
+                    $header= array($session_name . '=' . $sid
+                    . (empty($cookie_params['domain']) ? '' : '; Domain=' . $cookie_params['domain'])
+                    . (empty($cookie_params['path']) ? '' : '; Path=' . $cookie_params['path'])
+                    . (empty($cookie_params['samesite']) ? '' : '; SameSite=' . $cookie_params['samesite'])
+                    . (!$cookie_params['secure'] ? '' : '; Secure')
+                    . (!$cookie_params['httponly'] ? '' : '; HttpOnly'));
+                }else{
+                    $header= array($session_name . '=' . $sid
                     . (empty($cookie_params['domain']) ? '' : '; Domain=' . $cookie_params['domain'])
                     . (empty($lifetime) ? '' : '; Max-Age=' . ($lifetime *60))
                     . (empty($cookie_params['path']) ? '' : '; Path=' . $cookie_params['path'])
                     . (empty($cookie_params['samesite']) ? '' : '; SameSite=' . $cookie_params['samesite'])
                     . (!$cookie_params['secure'] ? '' : '; Secure')
                     . (!$cookie_params['httponly'] ? '' : '; HttpOnly'));
+                }
+                
+
+
+
                 header("Set-Cookie: $header[0]");
-            }
+           // }
             $this->_data['sid'] = $sid;
         }
         return $this->_data['sid'];
