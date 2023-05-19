@@ -86,11 +86,12 @@ $value = cache('key');
 cache(['key' => 'value'], 10);// Expires after 10 seconds
 ``` 
 ### view 
+The template engine uses `BladeOne`, a template engine similar to the laravel `blade`, click here https://github.com/EFTEC/BladeOne/wiki/BladeOne-Manual view the BladeOne manual. 
 ```
 echo view('greeting', ['name' => 'James']);
 ``` 
 The first parameter is the template name, i.e. `template/greeting.blade.php` , and the second parameter is the variable passed into the template. 
-###  get env 
+###  get Environment configuration 
 ```
 env('key');
 
@@ -100,10 +101,10 @@ The second value passed to the env function is the "default value". This value w
 
 ### Logging
 ```
-logs('some msg');//error log
+logger('some msg');//error log
 ```
 ```
-logs('some msg','warning'); //warning log | support:emergency ,alert ,critical ,error ,warning ,notice ,info ,debug 
+logger('some msg','warning'); //warning log | support:emergency ,alert ,critical ,error ,warning ,notice ,info ,debug 
 ```
 ### Routing 
 see config/route.php

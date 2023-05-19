@@ -137,7 +137,7 @@ Log::info($message);
 Log::debug($message);
 
  */
-function logs($msg, $type='error')
+function logger($msg, $type='error')
 {
     $log=new Log();
     $log::$type($msg);

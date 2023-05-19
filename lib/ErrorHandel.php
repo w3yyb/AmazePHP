@@ -160,7 +160,7 @@ class ErrorHandel
     public function logError($err, $level)
     {
         // $this->log->$level($err);
-        logs($err,$level);
+        logger($err,$level);
     }
 
     public function __destruct()
