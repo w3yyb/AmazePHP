@@ -169,13 +169,17 @@ cookie('name','value',86400); // 86400 seconds
 ```
 
 ###  Database
-select 
+The database component is using `PdoOne`, a database access object wrapper for PHP and PDO. Click https://github.com/EFTEC/PdoOne to see how to use it. 
+
+Below is an example of how to use it in a simple way.  
+
+select: 
 ```
 $results = db()->select("*")->from('users')->where("name like '%test%'")->toList();
 
 print_r($results);
 ``` 
-use Raw Sql 
+use Raw Sql: 
 ```
 $sql='select * from users where id=1';
 
@@ -183,19 +187,19 @@ $pdoStatement=db()->runRawQuery($sql,[],false);  // [] are the parameters
 
 print_r($pdoStatement->fetchAll());
 ```
-insert 
+insert: 
 ```
 db()->insert("users"
     ,['name','email','password']
     ,['kevin','email@email.com','123456']);
 ```
-update 
+update: 
 ```
 db()->update("users"
 ,['name'=>'Captain-Crunch','email'=>'mail@mail.com'] // set
 ,['id'=>6]); // where
 ```
-delete 
+delete: 
 ```
 db()->delete("users"
   ,['id'=>6]); // where
