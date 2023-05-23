@@ -1,9 +1,7 @@
 # AmazePHP
 ## About AmazePHP  
-A good choice for starting a PHP  project, it can be used for web and API development.   
-It only takes ONE minute to start a project.  
-It has super high performance, and a very easy to use development experience.  
-Native PHP first ，Lowest learning curve.  
+A good choice for start a PHP  project, it can be used for web and API development.   It only takes ONE minute to start a project.  It has super high performance, and a very easy to use development experience.  
+There are no complicated concepts, so it has lowest learning curve.  
 
 ## Features:  
 - Configuration  
