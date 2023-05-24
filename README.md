@@ -7,6 +7,7 @@ There are no complicated concepts, so it has lowest learning curve.
 - Configuration  
 - Env Vars  
 - Routing    
+- Controllers 
 - Database  
 - Http Client  
 - Logging   
@@ -122,7 +123,31 @@ The third line indicates PHP callbacks, support for object methods, static metho
 
 The fourth line is optional and indicates the name of the named route. 
 
+### Controllers 
+Instead of defining all of your request handling logic as closures in your route files, you may wish to organize this behavior using "controller" classes. Controllers can group related request handling logic into a single class. For example, a `UserController` class might handle all incoming requests related to users, including showing, creating, updating, and deleting users. By default, controllers are stored in the `app/Controllers` directory.
+#### Writing Controllers 
+In `app/controllers ` dir, you can write some controllers, for example:
+```
+<?php
+namespace App\Controllers;
 
+class Index
+{
+    public function index()
+    {
+        echo 'Hello AmazePHP!';
+    }
+}
+```
+Once you have written a controller class and method, you may define a route to the controller method like so:
+```
+ [
+        ['GET'],
+        '/',
+        [new App\Controllers\Index, 'index']
+ ],
+```
+When an incoming request matches the specified route URI, the show method on the App\Controllers\IndexController class will be invoked and the route parameters will be passed to the method. 
     
 ### http client 
 ```
