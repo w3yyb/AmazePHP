@@ -147,7 +147,7 @@ Once you have written a controller class and method, you may define a route to t
         [new App\Controllers\Index, 'index']
  ],
 ```
-When an incoming request matches the specified route URI, the show method on the App\Controllers\IndexController class will be invoked and the route parameters will be passed to the method. 
+When an incoming request matches the specified route URI, the index method on the App\Controllers\Index class will be invoked and the route parameters will be passed to the method. 
     
 ### http client 
 ```
