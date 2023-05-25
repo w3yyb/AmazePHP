@@ -77,6 +77,11 @@ function view($view = null, $data = [])
 
 function config($key = null, $default = null)
 {
+
+if (!isset($GLOBALS['dotenv'])) {
+    (new DotEnv());
+}
+
     $config= LoadConfiguration::getInstance();
     if (is_null($key)) {
         return  $config;

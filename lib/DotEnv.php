@@ -32,6 +32,7 @@ class DotEnv
 
     public function __construct(array $options = [])
     {
+        $GLOBALS['dotenv'] =1;
         // define('BASE_PATH', dirname(__DIR__));
         $path=BASE_PATH.'/.env';
         if (!file_exists($path)) {
