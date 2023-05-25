@@ -5,6 +5,7 @@ use eftec\PdoOne;
 class DB
 {
     use SingletonTrait;
+    public $dao;
 
     // private $cache;
 

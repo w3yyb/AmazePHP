@@ -37,7 +37,7 @@ composer install
  Open http://localhost:9080  in your browser.
 
  ## requirements:  
- php 8.1  
+ php 8.1+  
 
  ## Directory Structure  
 
