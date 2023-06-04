@@ -16,7 +16,7 @@ if (config('session.enable')) {
 }
 
 
-if (config('session.enable') && $reqMet=='POST'  || $reqMet=='PUT' || $reqMet=='DELETE' || $reqMet=='PATCH') {
+if (config('session.enable') &&($reqMet=='POST'  || $reqMet=='PUT' || $reqMet=='DELETE' || $reqMet=='PATCH')) {
     VerifyCsrfToken::getInstance();
 }
 
