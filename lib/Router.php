@@ -30,7 +30,9 @@ class Router
         // and we dont want stuff like ?var=value
         $reqUrl = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);//$_SERVER['PATH_INFO'];
 
-       
+       if ($reqUrl == null ) {
+            $reqUrl = '';
+        }
 
         $reqMet = $_SERVER['REQUEST_METHOD'];
 
