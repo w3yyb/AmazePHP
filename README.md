@@ -18,6 +18,7 @@ There are no complicated concepts, so it has lowest learning curve.
 - Cookie 
 - URL Generation 
 - CSRF Protection 
+- Middleware 
 
 
 ## install:    
