@@ -158,6 +158,7 @@ Middleware is divided into before middleware and after middleware.Before middlew
 Request->Before middleware->Actual action->After middleware->Response
 ```
 #### Defining Middleware 
+The main difference between before middleware and after middleware is where the code is executed. 
 In app/Middleware directory:
 ##### Defining Before Middleware 
 Create such as  bMiddleware.php
@@ -206,7 +207,7 @@ In config/middleware.php,write the following:
 ```
 return [
     App\Middleware\aMiddleware::class,
-     App\Middleware\bMiddleware::class,
+    App\Middleware\bMiddleware::class,
 ];
 ```
 
