@@ -8,6 +8,7 @@ There are no complicated concepts, so it has lowest learning curve.
 - Env Vars  
 - Routing    
 - Controllers 
+- Middleware 
 - Database  
 - Http Client  
 - Logging   
@@ -18,7 +19,6 @@ There are no complicated concepts, so it has lowest learning curve.
 - Cookie 
 - URL Generation 
 - CSRF Protection 
-- Middleware 
 
 
 ## install:    
@@ -149,6 +149,67 @@ Once you have written a controller class and method, you may define a route to t
  ],
 ```
 When an incoming request matches the specified route URI, the index method on the App\Controllers\Index class will be invoked and the route parameters will be passed to the method. 
+### Middleware 
+Middleware, also known as HTTP middleware, is mainly used to modify or filter HTTP requests or responses.All of these middleware are located in the app/Middleware directory.  
+ 
+Middleware is divided into before middleware and after middleware.Before middleware is mainly used to modify HTTP requests. After middleware is mainly used to modify HTTP responses.
+
+```
+Request->Before middleware->Actual action->After middleware->Response
+```
+#### Defining Middleware 
+In app/Middleware directory:
+##### Defining Before Middleware 
+Create such as  bMiddleware.php
+```
+<?php
+namespace App\Middleware;
+
+class bMiddleware implements MiddlewareInterface {
+
+    public function process($object, \Closure $next,...$params)
+    {
+        
+        //Perform some logic here
+
+        return $next($object);
+    }
+
+}
+?>
+
+```
+##### Defining After Middleware 
+Create such as  aMiddleware.php
+
+```
+<?php
+namespace App\Middleware;
+
+class aMiddleware implements MiddlewareInterface {
+
+    public function process($object, \Closure $next,...$params)
+    {
+
+        $response = $next($object);
+         //Perform some logic here
+
+        return $response;
+    }
+
+}
+?>
+
+```
+#### Registering Middleware
+In config/middleware.php,write the following:
+```
+return [
+    App\Middleware\aMiddleware::class,
+     App\Middleware\bMiddleware::class,
+];
+```
+
     
 ### http client 
 ```
