@@ -16,7 +16,8 @@
       "eftec/bladeone": "^4.9",
       "spatie/macroable": "^2.0",
       "eftec/cacheone": "^2.16",
-      "eftec/pdoone": "^4.2"
+      "eftec/pdoone": "^4.2",
+    "doctrine/event-manager": "^2.0"
   },
   "autoload": {
       "psr-4": {
