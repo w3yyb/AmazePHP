@@ -5,5 +5,6 @@ use \Closure as Closure;
 
 interface MiddlewareInterface
 {
-    public function process($object, Closure $next, $params);
+    //return Response
+    public function process($request, Closure $next, $params);
 }
