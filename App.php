@@ -22,7 +22,7 @@ if (config('session.enable') &&($reqMet=='POST'  || $reqMet=='PUT' || $reqMet=='
 
 $router = Router::getInstance();
 foreach (config('route') as $key => $value) {
-    $router->addRoute($value[0][0], $value[1], $value[2], $value[3] ?? null);
+    $router->addRoute($value[0][0], $value[1], $value[2], $value[3] ?? null, $value['middleware'] ?? []);
 }
 
 

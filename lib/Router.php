@@ -8,13 +8,13 @@ class Router
     protected static $_nameList = [];
     private $_path = [];
 
-    public function addRoute($method, $url, $callback, $name = null)
+    public function addRoute($method, $url, $callback, $name = null, $middleware = null)
     {
         if ($url !== '/') {//Remove the trailing slash of the URL
             while ($url !== $url = rtrim($url, '/'));//The trailing slash of the URL should not be removed, it should be changed later
         }
 
-        $this->routes[] = ['method' => $method, 'url' => $url, 'callback' => $callback];
+        $this->routes[] = ['method' => $method, 'url' => $url, 'callback' => $callback, 'middleware' => $middleware];
         $this->name($name);
         $this->_path[$name]= '/'.ltrim($url, '/');
 
@@ -30,7 +30,7 @@ class Router
         // and we dont want stuff like ?var=value
         $reqUrl = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);//$_SERVER['PATH_INFO'];
 
-       if ($reqUrl == null ) {
+        if ($reqUrl == null) {
             $reqUrl = '';
         }
 
@@ -61,13 +61,17 @@ class Router
 
                 if ($route['method'] !=='*'  && $reqMet !=='HEAD'  && (
                     !empty($route['method']) &&
-                    !in_array($reqMet, explode(',', $route['method'])))
+                    !in_array($reqMet, explode(',', $route['method']))
+                )
                 ) {
                     throw new Exception("405 Not Allowed");
                 }
-                
 
-                return call_user_func_array($route['callback'], $matches);
+
+                return    (new App\Pipeline())->through($route['middleware'])
+                ->then(null, function () use ($route, $matches) {
+                    echo  call_user_func_array($route['callback'], $matches);
+                });
             } else {
                 $is_match++;
             }

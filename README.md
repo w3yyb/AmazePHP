@@ -113,7 +113,8 @@ see config/route.php
         ['GET'], 
         '/',  
         [new App\Index, 'index'],
-        ['routename']
+        ['routename'],
+         'middleware'=>[App\Middleware\a2Middleware::class,App\Middleware\b2Middleware::class],
   ],
 ```
 The first line is the HTTP request method, which supports HEAD, GET, POST, PUT, PATCH, DELETE. `['POST,GET']` means that both POST and GET are supported. `['*']` indicates that all HTTP methods are supported.  
@@ -123,6 +124,8 @@ The second line represents the path, like `/users/{uid}/posts/[{pid}][/]`:  in c
 The third line indicates PHP callbacks, support for object methods, static methods of classes, anonymous functions, functions, etc. 
 
 The fourth line is optional and indicates the name of the named route. 
+
+The middleware key register routing middleware.
 
 ### Controllers 
 Instead of defining all of your request handling logic as closures in your route files, you may wish to organize this behavior using "controller" classes. Controllers can group related request handling logic into a single class. For example, a `UserController` class might handle all incoming requests related to users, including showing, creating, updating, and deleting users. By default, controllers are stored in the `app/Controllers` directory.
@@ -202,7 +205,7 @@ class aMiddleware implements MiddlewareInterface {
 ?>
 
 ```
-#### Registering Middleware
+#### Registering Global Middleware
 In config/middleware.php,write the following:
 ```
 return [
@@ -210,6 +213,8 @@ return [
     App\Middleware\bMiddleware::class,
 ];
 ```
+#### Register routing middleware 
+See Routing.
 
     
 ### http client 
