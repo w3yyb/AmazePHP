@@ -7,7 +7,7 @@ There are no complicated concepts, so it has lowest learning curve.
 - Configuration  
 - Env Vars  
 - Routing    
-- Request 
+- Requests 
 - Controllers 
 - Middleware 
 - Database  
@@ -126,8 +126,41 @@ The third line indicates PHP callbacks, support for object methods, static metho
 
 The fourth line is optional and indicates the name of the named route. 
 
-The middleware key register routing middleware.
+The middleware key  is optional  register routing middleware.
 
+### Requests 
+ App\Request class provides an object-oriented way to interact with the current HTTP request being handled by your application as well as retrieve the input, cookies, and files that were submitted with the request.
+ #### usage
+ ```
+ $input = request()->all();
+$name = request()->input('name');
+$value = request()->cookie('name');
+$value = request()->header('X-Header-Name');
+$method = request()->method();
+request()->host();
+$url = request()->url();
+$urlWithQueryString = request()->fullUrl();
+$uri = request()->path();
+if (request()->is('admin/*')) {
+    // ...
+}
+
+$input = request()->only(['username', 'password']);
+ 
+$input = request()t->only('username', 'password');
+ 
+$input = request()->except(['credit_card']);
+ 
+$input = request()->except('credit_card');
+
+  $file = request()->file('upload');
+        if ($file && $file->isValid()) {
+            $file->move(PUBLIC_PATH.'/myfile.'.$file->getUploadExtension());
+            return json(['code' => 0, 'msg' => 'upload success']);
+        }
+
+ ```
+ More usage see app\Request.php.
 ### Controllers 
 Instead of defining all of your request handling logic as closures in your route files, you may wish to organize this behavior using "controller" classes. Controllers can group related request handling logic into a single class. For example, a `UserController` class might handle all incoming requests related to users, including showing, creating, updating, and deleting users. By default, controllers are stored in the `app/Controllers` directory.
 #### Writing Controllers 

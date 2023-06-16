@@ -296,7 +296,7 @@ class Request
 
         foreach ($patterns as $pattern) {
 
-            if (Str::is($pattern, $url)) {
+            if (\Str::is($pattern, $url)) {
                 return true;
             }
         }
@@ -316,7 +316,7 @@ class Request
         $path = $this->decodedPath();
         foreach ($patterns as $pattern) {
         $path=    ltrim ($path,'/');
-            if (Str::is($pattern, $path)) {
+            if (\Str::is($pattern, $path)) {
                 return true;
             }
         }
@@ -432,13 +432,13 @@ class Request
 
     public function isJson()
     {
-        return Str::contains($this->header('content-type'), ['/json', '+json']);
+        return \Str::contains($this->header('content-type'), ['/json', '+json']);
     }
 
     public function isJson2()
     {
         return $this->hasHeader('Content-Type') &&
-               Str::contains($this->header('Content-Type')[0], 'json');
+               \Str::contains($this->header('Content-Type')[0], 'json');
     }
      
 
