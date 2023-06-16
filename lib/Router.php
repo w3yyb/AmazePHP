@@ -67,9 +67,10 @@ class Router
                     throw new Exception("405 Not Allowed");
                 }
 
+                $request = App\Request::getInstance();
 
                 return    (new App\Pipeline())->through($route['middleware'])
-                ->then(null, function () use ($route, $matches) {
+                ->then($request, function () use ($route, $matches) {
                     echo  call_user_func_array($route['callback'], $matches);
                 });
             } else {

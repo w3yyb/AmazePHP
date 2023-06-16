@@ -7,6 +7,7 @@ There are no complicated concepts, so it has lowest learning curve.
 - Configuration  
 - Env Vars  
 - Routing    
+- Request 
 - Controllers 
 - Middleware 
 - Database  

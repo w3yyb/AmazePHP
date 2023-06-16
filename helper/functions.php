@@ -64,6 +64,10 @@ function value($value, ...$args)
     return $value instanceof Closure ? $value(...$args) : $value;
 }
 
+function request()
+{
+    return App\Request::getInstance();
+}
 
 function view($view = null, $data = [])
 {

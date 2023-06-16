@@ -25,11 +25,13 @@ foreach (config('route') as $key => $value) {
     $router->addRoute($value[0][0], $value[1], $value[2], $value[3] ?? null, $value['middleware'] ?? []);
 }
 
+$request = App\Request::getInstance();
+
 
 $middleware =require BASE_PATH.'/config/middleware.php';
  
 return    (new App\Pipeline())->through($middleware)
-->then(null ,function () use ($router) {
+->then($request ,function () use ($router) {
     $response =$router->doRouting();
     if ($response !== null) {
         echo $response;
