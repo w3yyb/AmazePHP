@@ -1,6 +1,6 @@
 <?php
-namespace App;
 
+namespace App;
 
 /**
  * Class UploadFile
@@ -23,6 +23,15 @@ class UploadFile extends \SplFileInfo
      */
     protected $_uploadErrorCode = null;
 
+    private $imageType=["image/gif","image/jpeg","image/jpg","image/png","image/x-png","image/bmp","image/x-ms-bmp","image/pjpeg"];//图片类型
+    private $fileType=["application/zip","application/msexcel","application/xml","application/vnd.ms-excel","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/mspowerpoint","application/vnd.ms-powerpoint","application/pdf","application/x-shockwave-flash","application/x-rar-compressed","application/x-rar","audio/mpeg","audio/x-ms-wma","flv-application/octet-stream","audio/x-ms-wmv","video/mp4","video/x-flv","audio/x-wav","application/msword","video/mpeg"];//文件类型
+
+
+    private $tmpName;
+    private $fileSize;
+    private $maxSize=10485760;//10M
+
+
     /**
      * UploadFile constructor.
      * @param $file_name
@@ -30,13 +39,69 @@ class UploadFile extends \SplFileInfo
      * @param $upload_mime_type
      * @param $upload_error_code
      */
-    public function __construct($file_name, $upload_name, $upload_mime_type, $upload_error_code)
+    //UploadFile($files['tmp_name'], $files['name'], $files['type'], $files['error']);
+    public function __construct($file_name, $upload_name, $upload_mime_type, $upload_error_code, $size, $upType="image")
     {
+        $this->tmpName = $file_name;
+
         $this->_uploadName = $upload_name;
         $this->_uploadMimeType = $upload_mime_type;
         $this->_uploadErrorCode = $upload_error_code;
+
+
+
+        $this->fileSize =  $size;
+        if ($this->fileSize > $this->maxSize) {
+            exit("文件超过".($this->maxSize / 1024 / 1024)." M大小");
+        }
+        if ($this->_uploadErrorCode > 0) {
+            exit($error);
+        }
+        if ($upType== "image") {
+            $this->checkImage();
+        } else {
+            $this->checkFile();
+        }
+
         parent::__construct($file_name);
     }
+
+
+    //check  image type
+    public function checkImage()
+    {
+
+        if (!in_array($this->_uploadMimeType, $this->imageType)) {
+            exit("invalid image type");
+        }
+
+        try {
+            $ftype=getimagesize($this->tmpName);
+        } catch (\Throwable $th) {
+            exit("not a image file");
+        }
+        if (!in_array($ftype['mime'], $this->imageType)) {
+            exit("invalid image type");
+        }
+    }
+
+    //check file type
+    public function checkFile()
+    {
+
+
+        if (!in_array($this->_uploadMimeType, $this->fileType)) {
+            exit("invalid file type!");
+        }
+
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $ftype= finfo_file($finfo, $this->tmpName);// get file  type by file content
+        finfo_close($finfo);
+        if (!in_array($ftype, $this->fileType)) {
+            exit("invalid file type");
+        }
+    }
+
 
     /**
      * @return string

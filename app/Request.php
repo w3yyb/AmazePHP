@@ -197,7 +197,7 @@ class Request
      * @param null $name
      * @return null| array | UploadFile
      */
-    public function file($name = null)
+    public function file($name = null,$type="image")
     {
         $files = $_FILES;//;parent::file($name);
         if (null === $files) {
@@ -206,14 +206,14 @@ class Request
         if ($name !== null) {
             $files=array_values($files)[0] ?? '';
             if (!empty($files)) {
-                return new UploadFile($files['tmp_name'], $files['name'], $files['type'], $files['error']);
+                return new UploadFile($files['tmp_name'], $files['name'], $files['type'], $files['error'], $files['size'],$type);
             } else {
                 return '';
             }
         }
         $upload_files = [];
         foreach ($files as $name => $file) {
-            $upload_files[$name] = new UploadFile($file['tmp_name'], $file['name'], $file['type'], $file['error']);
+            $upload_files[$name] = new UploadFile($file['tmp_name'], $file['name'], $file['type'], $file['error'],$file['size'],$type);
         }
         return $upload_files;
     }
