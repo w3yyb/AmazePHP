@@ -1,4 +1,6 @@
 <?php
+namespace AmazePHP;
+
 /**
 *mysql数据库类
 * leninx 2013.5

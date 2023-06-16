@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+use AmazePHP\Router;
 use PHPUnit\Framework\TestCase;
 
 final class UrlTest extends TestCase

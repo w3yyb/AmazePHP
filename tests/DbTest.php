@@ -9,8 +9,8 @@ final class DbTest extends TestCase
             define('BASE_PATH', __DIR__ . '/..');
 
         }
-        include_once 'lib/DotEnv.php';
-        (new DotEnv());
+        include_once 'AmazePHP/src/DotEnv.php';
+        (new \AmazePHP\DotEnv());
         $string = 'test1';
 
         $email = $results = db()->select("*")->from('users')->where("name like '%test%'")->toList()[0]['name'];
@@ -25,8 +25,8 @@ final class DbTest extends TestCase
             define('BASE_PATH', __DIR__ . '/..');
 
         }
-        include_once 'lib/DotEnv.php';
-        (new DotEnv());
+        include_once 'AmazePHP/src/DotEnv.php';
+        (new \AmazePHP\DotEnv());
        
         db()->insert("users"
     ,['name','email','password']

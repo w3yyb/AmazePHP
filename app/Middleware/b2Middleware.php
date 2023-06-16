@@ -1,5 +1,6 @@
 <?php
 namespace App\Middleware;
+use AmazePHP\MiddlewareInterface;
 
 class b2Middleware implements MiddlewareInterface {
 

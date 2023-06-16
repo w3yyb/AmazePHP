@@ -10,8 +10,8 @@ final class EnvTest extends TestCase
 
         }
 
-        include_once 'lib/DotEnv.php';
-        (new DotEnv());
+        include_once 'AmazePHP/src/DotEnv.php';
+        (new \AmazePHP\DotEnv());
 
 
         $string = true;
@@ -27,8 +27,8 @@ final class EnvTest extends TestCase
             define('BASE_PATH', __DIR__ . '/..');
 
         }
-        include_once 'lib/DotEnv.php';
-        (new DotEnv());
+        include_once 'AmazePHP/src/DotEnv.php';
+        (new \AmazePHP\DotEnv());
         config(['app.timezone' => 'America/Chicago']);
 
         $string = 'default';

@@ -1,5 +1,6 @@
 <?php
-namespace App;
+namespace AmazePHP;
+
 
 // use WondPHP\Http\UploadFile;
 // use Symfony\Component\HttpFoundation\AcceptHeader;
@@ -12,7 +13,7 @@ namespace App;
  */
 class Request  
 {
-    use \SingletonTrait;
+    use SingletonTrait;
     
      
     public const HEADER_FORWARDED = 0b000001; // When using RFC 7239

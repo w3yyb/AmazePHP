@@ -1,5 +1,6 @@
 <?php
 
+namespace AmazePHP;
 
 
 use SessionHandlerInterface;

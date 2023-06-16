@@ -1,4 +1,5 @@
 <?php
+namespace AmazePHP;
 
 
 use Closure as Closure;
@@ -21,7 +22,7 @@ use Traversable as Traversable;
 
 class Str
 {
-    use Spatie\Macroable\Macroable;
+    use \Spatie\Macroable\Macroable;
 
     /**
      * The cache of snake-cased words.

@@ -1,10 +1,11 @@
 <?php
-
+use AmazePHP\Router;
+use AmazePHP\VerifyCsrfToken;
 define('BASE_PATH', __DIR__);
-include 'lib/DotEnv.php';
-include 'lib/ErrorHandel.php';
-(new DotEnv());
-(new ErrorHandel());
+include 'AmazePHP/src/DotEnv.php';
+include 'AmazePHP/src/ErrorHandel.php';
+(new AmazePHP\DotEnv());
+(new AmazePHP\ErrorHandel());
 
 include 'vendor/autoload.php';
 
@@ -25,12 +26,12 @@ foreach (config('route') as $key => $value) {
     $router->addRoute($value[0][0], $value[1], $value[2], $value[3] ?? null, $value['middleware'] ?? []);
 }
 
-$request = App\Request::getInstance();
+$request = AmazePHP\Request::getInstance();
 
 
 $middleware =require BASE_PATH.'/config/middleware.php';
  
-return    (new App\Pipeline())->through($middleware)
+return    (new AmazePHP\Pipeline())->through($middleware)
 ->then($request ,function () use ($router) {
     $response =$router->doRouting();
     if ($response !== null) {

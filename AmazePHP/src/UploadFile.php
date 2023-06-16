@@ -1,6 +1,7 @@
 <?php
 
-namespace App;
+namespace AmazePHP;
+
 
 /**
  * Class UploadFile
@@ -52,10 +53,10 @@ class UploadFile extends \SplFileInfo
 
         $this->fileSize =  $size;
         if ($this->fileSize > $this->maxSize) {
-            exit("文件超过".($this->maxSize / 1024 / 1024)." M大小");
+            exit("file max than".($this->maxSize / 1024 / 1024)." M");
         }
         if ($this->_uploadErrorCode > 0) {
-            exit($error);
+            exit($error ?? 'no file upload');
         }
         if ($upType== "image") {
             $this->checkImage();

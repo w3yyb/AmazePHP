@@ -1,6 +1,6 @@
 <?php
  
-
+use AmazePHP\FileSessionHandler;
 return [
 
 

@@ -1,4 +1,5 @@
 <?php
+namespace AmazePHP;
 
 class Router
 {
@@ -67,9 +68,9 @@ class Router
                     throw new Exception("405 Not Allowed");
                 }
 
-                $request = App\Request::getInstance();
+                $request =  Request::getInstance();
 
-                return    (new App\Pipeline())->through($route['middleware'])
+                return    (new  Pipeline())->through($route['middleware'])
                 ->then($request, function () use ($route, $matches) {
                     echo  call_user_func_array($route['callback'], $matches);
                 });

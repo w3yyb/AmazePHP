@@ -1,8 +1,9 @@
 <?php
 
+namespace AmazePHP;
 
 use ArrayAccess as ArrayAccess;
-use Arr as Arr;
+// use Arr as Arr;
 
 class ConfigRepository implements ArrayAccess
 {

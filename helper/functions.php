@@ -1,7 +1,15 @@
 <?php
 
 use eftec\bladeone\BladeOne;
-
+use AmazePHP\Log;
+use AmazePHP\LoadConfiguration;
+use AmazePHP\Cache;
+use AmazePHP\DotEnv;
+use AmazePHP\Request;
+use AmazePHP\DB;
+use AmazePHP\Session;
+use AmazePHP\UrlGenerator;
+use AmazePHP\Router;
 function env($key, $default = null)
 {
     $apcu_key="env$key";
@@ -66,7 +74,7 @@ function value($value, ...$args)
 
 function request()
 {
-    return App\Request::getInstance();
+    return Request::getInstance();
 }
 
 function view($view = null, $data = [])

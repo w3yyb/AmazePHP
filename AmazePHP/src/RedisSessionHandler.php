@@ -1,4 +1,5 @@
 <?php
+namespace AmazePHP;
 
 /**
  * Class RedisSessionHandler

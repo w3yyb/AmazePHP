@@ -1,5 +1,6 @@
 <?php
 
+namespace AmazePHP;
 
 use DateInterval as DateInterval;
 use DateTimeInterface as DateTimeInterface;

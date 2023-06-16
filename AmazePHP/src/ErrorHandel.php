@@ -1,4 +1,5 @@
 <?php
+namespace AmazePHP;
 
 // use Monolog\Level;
 // use Monolog\Logger;
@@ -121,7 +122,7 @@ class ErrorHandel
     public function errorHandler($severity, $message, $file, $line)
     {
         $full_msg=$message . "  at  Line:" . $line . "  in   File:" . $file;
-        throw new ErrorException($this->friendlyErrorType($full_msg, $severity) . ":" . $message, 0, $severity, $file, $line);
+        throw new \ErrorException($this->friendlyErrorType($full_msg, $severity) . ":" . $message, 0, $severity, $file, $line);
     }
 
     public function friendlyErrorType($error, $type)

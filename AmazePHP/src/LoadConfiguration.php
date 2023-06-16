@@ -1,5 +1,6 @@
 <?php
 
+namespace AmazePHP;
  
 
 use Exception as Exception;
@@ -43,7 +44,7 @@ class LoadConfiguration
         $this->repo=$repository = new ConfigRepository($items);
 
 
-        $config_path = __DIR__ . '/../config';
+        $config_path = BASE_PATH . '/config';
 
         if (! isset($loadedFromCache)) {
             $this->loadConfigurationFiles($config_path, $repository);

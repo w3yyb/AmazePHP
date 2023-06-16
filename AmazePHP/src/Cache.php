@@ -1,4 +1,5 @@
 <?php
+namespace AmazePHP;
 
 use eftec\CacheOne;
 

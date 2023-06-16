@@ -1,5 +1,6 @@
 <?php
-namespace App;
+namespace AmazePHP;
+
 
 use InvalidArgumentException as InvalidArgumentException ;
 use Closure as Closure;

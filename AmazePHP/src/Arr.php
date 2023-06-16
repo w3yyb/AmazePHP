@@ -1,5 +1,5 @@
 <?php
-
+namespace AmazePHP;
 
 use ArrayAccess as ArrayAccess;
 use InvalidArgumentException as InvalidArgumentException;

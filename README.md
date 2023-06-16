@@ -147,11 +147,7 @@ if (request()->is('admin/*')) {
 
 $input = request()->only(['username', 'password']);
  
-$input = request()t->only('username', 'password');
- 
 $input = request()->except(['credit_card']);
- 
-$input = request()->except('credit_card');
 
   $file = request()->file('upload');
         if ($file && $file->isValid()) {

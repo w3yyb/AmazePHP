@@ -1,4 +1,5 @@
 <?php
+namespace AmazePHP;
 
 
 class CookieValuePrefix
