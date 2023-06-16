@@ -274,7 +274,7 @@ class Request
      */
     public function url()
     {
-        return '//' . $this->host() . $this->path();
+        return    (empty($_SERVER['HTTPS']) ? 'http' : 'https') .'://' . $this->host() . $this->path();
     }
 
     /**
@@ -282,7 +282,7 @@ class Request
      */
     public function fullUrl()
     {
-        return '//' . $this->host() . $this->uri();
+        return (empty($_SERVER['HTTPS']) ? 'http' : 'https') . '://' . $this->host() . $this->uri();
     }
      /**
      * Determine if the current request URL and query string matches a pattern.
