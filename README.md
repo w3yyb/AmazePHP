@@ -129,7 +129,7 @@ The fourth line is optional and indicates the name of the named route.
 The middleware key  is optional  register routing middleware.
 
 ### Requests 
- App\Request class provides an object-oriented way to interact with the current HTTP request being handled by your application as well as retrieve the input, cookies, and files that were submitted with the request.
+ AmazePHP\Request class provides an object-oriented way to interact with the current HTTP request being handled by your application as well as retrieve the input, cookies, and files that were submitted with the request.
  #### usage
  ```
  $input = request()->all();
@@ -156,11 +156,11 @@ $input = request()->except(['credit_card']);
         }
 
  ```
- More usage see app\Request.php.
+ More usage see AmazePHP/src/Request.php.
 ### Controllers 
 Instead of defining all of your request handling logic as closures in your route files, you may wish to organize this behavior using "controller" classes. Controllers can group related request handling logic into a single class. For example, a `UserController` class might handle all incoming requests related to users, including showing, creating, updating, and deleting users. By default, controllers are stored in the `app/Controllers` directory.
 #### Writing Controllers 
-In `app/controllers ` dir, you can write some controllers, for example:
+In `app/Controllers ` dir, you can write some controllers, for example:
 ```
 <?php
 namespace App\Controllers;
