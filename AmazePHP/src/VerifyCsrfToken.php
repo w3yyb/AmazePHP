@@ -53,7 +53,7 @@ class VerifyCsrfToken
         ) {
             // success
         }else{
-            throw new Exception('CSRF token mismatch.');
+            throw new \Exception('CSRF token mismatch.');
         }
     }
 

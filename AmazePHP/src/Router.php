@@ -65,7 +65,7 @@ class Router
                     !in_array($reqMet, explode(',', $route['method']))
                 )
                 ) {
-                    throw new Exception("405 Not Allowed");
+                    throw new \Exception("405 Not Allowed");
                 }
 
                 $request =  Request::getInstance();
@@ -80,7 +80,7 @@ class Router
         }
 
         if ($is_match == $this->routeCount) {
-            throw new Exception("404 Not Found");
+            throw new \Exception("404 Not Found");
         }
     }
 
