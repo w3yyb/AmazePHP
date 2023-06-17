@@ -8,6 +8,8 @@ class Log
 {
     protected  $_manager = null;
     protected static $_instance = [];
+    use SingletonTrait;
+
 
      
     public  function __construct()
@@ -52,7 +54,16 @@ class Log
 
         return static::channel('default')->{$name}(... $arguments);
     }
+
+
+    public    function __call($name, $arguments)
+    {
+
+        return static::channel('default')->{$name}(... $arguments);
+    }
   
+
+
  
     
 }

@@ -10,6 +10,7 @@ There are no complicated concepts, so it has the lowest learning curve.
 - Requests 
 - Controllers 
 - Middleware 
+- Facades 
 - Database  
 - Http Client  
 - Logging   

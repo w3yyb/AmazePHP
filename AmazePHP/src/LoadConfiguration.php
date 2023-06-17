@@ -64,7 +64,7 @@ class LoadConfiguration
         mb_internal_encoding('UTF-8');
     }
 
-    public function get($key,$val){
+    public function get($key,$val=null){
 
         return $this->repo->get($key,$val);
 
