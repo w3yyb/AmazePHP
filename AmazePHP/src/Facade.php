@@ -1,34 +1,26 @@
 <?php
-// +----------------------------------------------------------------------
-// | ThinkPHP [ WE CAN DO IT JUST THINK ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2006~2021 http://thinkphp.cn All rights reserved.
-// +----------------------------------------------------------------------
-// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
-// +----------------------------------------------------------------------
-// | Author: liu21st <liu21st@gmail.com>
-// +----------------------------------------------------------------------
+ 
 namespace AmazePHP;
 
 
 /**
- * Facade管理类
+ * Facade
  */
 class Facade
 {
     /**
-     * 始终创建新的对象实例
+     * Always create a new object instance
      * @var bool
      */
     protected static $alwaysNewInstance;
 
     /**
-     * 创建Facade实例
+     * Create a Facade instance
      * @static
      * @access protected
-     * @param  string $class       类名或标识
-     * @param  array  $args        变量
-     * @param  bool   $newInstance 是否每次创建新的实例
+     * @param  string $class       Class name or identifier
+     * @param  array  $args        variable
+     * @param  bool   $newInstance Whether to create a new instance each time
      * @return object
      */
     protected static function createFacade(string $class = '', array $args = [], bool $newInstance = false)
@@ -50,7 +42,7 @@ class Facade
     }
 
     /**
-     * 获取当前Facade对应类名
+     * Gets the current Facade corresponding class name
      * @access protected
      * @return string
      */
@@ -58,7 +50,7 @@ class Facade
     {}
 
     /**
-     * 带参数实例化当前Facade类
+     * Instantiates the current Facade class with parameters
      * @access public
      * @return object
      */
@@ -70,11 +62,11 @@ class Facade
     }
 
     /**
-     * 调用类的实例
+     * Call an instance of the class
      * @access public
-     * @param  string     $class       类名或者标识
-     * @param  array|true $args        变量
-     * @param  bool       $newInstance 是否每次创建新的实例
+     * @param  string     $class       Class name or identifier
+     * @param  array|true $args        variable
+     * @param  bool       $newInstance Whether to create a new instance each time
      * @return object
      */
     public static function make(string $class, $args = [], $newInstance = false)
@@ -84,7 +76,7 @@ class Facade
         }
 
         if (true === $args) {
-            // 总是创建新的实例化对象
+            // New instantiated objects are always created
             $newInstance = true;
             $args        = [];
         }
@@ -92,7 +84,7 @@ class Facade
         return self::createFacade($class, $args, $newInstance);
     }
 
-    // 调用实际类的方法
+    // Call the methods of the actual class
     public static function __callStatic($method, $params)
     {
         return call_user_func_array([static::createFacade(), $method], $params);
