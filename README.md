@@ -22,7 +22,7 @@ There are no complicated concepts, so it has lowest learning curve.
 - CSRF Protection 
 
 
-## install:    
+## Installation:    
 ```
 git clone https://github.com/w3yyb/AmazePHP.git  
 
@@ -30,7 +30,7 @@ cd AmazePHP
 
 composer install  
 ```
- ## run
+ ## Run
  ```
  cd public/  
 
@@ -38,7 +38,7 @@ composer install
  ```
  Open http://localhost:9080  in your browser.
 
- ## requirements:  
+ ## Requirements:  
  php 8.1+  
 
  ## Directory Structure  
@@ -49,7 +49,7 @@ composer install
  The config directory, as the name implies, contains all of your application's configuration files.  Include the route config file.
   ### The helper Directory  
 The helper functions in it.
-### The lib Directory
+### The AmazePHP Directory
 The framework core directory, include some lib class. And you can put  your class file in it.
 ### The public Directory
 The public directory contains the index.php file, which is the entry point for all requests entering your application and configures autoloading. This directory also houses your assets such as images, JavaScript, and CSS.
@@ -115,7 +115,7 @@ see config/route.php
         '/',  
         [new App\Index, 'index'],
         ['routename'],
-         'middleware'=>[App\Middleware\a2Middleware::class,App\Middleware\b2Middleware::class],
+        'middleware'=>[App\Middleware\a2Middleware::class,App\Middleware\b2Middleware::class],
   ],
 ```
 The first line is the HTTP request method, which supports HEAD, GET, POST, PUT, PATCH, DELETE. `['POST,GET']` means that both POST and GET are supported. `['*']` indicates that all HTTP methods are supported.  
@@ -198,6 +198,7 @@ Create such as  bMiddleware.php
 ```
 <?php
 namespace App\Middleware;
+use AmazePHP\MiddlewareInterface;
 
 class bMiddleware implements MiddlewareInterface {
 
@@ -219,6 +220,7 @@ Create such as  aMiddleware.php
 ```
 <?php
 namespace App\Middleware;
+use AmazePHP\MiddlewareInterface;
 
 class aMiddleware implements MiddlewareInterface {
 
