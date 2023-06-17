@@ -297,7 +297,7 @@ class Request
 
         foreach ($patterns as $pattern) {
 
-            if (\Str::is($pattern, $url)) {
+            if (Str::is($pattern, $url)) {
                 return true;
             }
         }
@@ -317,7 +317,7 @@ class Request
         $path = $this->decodedPath();
         foreach ($patterns as $pattern) {
         $path=    ltrim ($path,'/');
-            if (\Str::is($pattern, $path)) {
+            if (Str::is($pattern, $path)) {
                 return true;
             }
         }
@@ -433,14 +433,14 @@ class Request
 
     public function isJson()
     {
-        return \Str::contains($this->header('content-type'), ['/json', '+json']);
+        return Str::contains($this->header('content-type') ?? '', ['/json', '+json']);
     }
 
-    public function isJson2()
-    {
-        return $this->hasHeader('Content-Type') &&
-               \Str::contains($this->header('Content-Type')[0], 'json');
-    }
+    // public function isJson2()
+    // {
+    //     return $this->hasHeader('Content-Type') &&
+    //            Str::contains($this->header('Content-Type')[0], 'json');
+    // }
      
 
 
@@ -452,12 +452,12 @@ class Request
         return $this->accepts('application/json');
 
     }
-
+// todo
     public function controller()
     {
         return $this->controller;//$GLOBALS['classname'];
     }
-
+//todo 
     public function action()
     {
         return $this->action;
@@ -546,8 +546,8 @@ class Request
      */
     public function old($key = null, $default = null)
     {
-        return $this->session()->getOldInput($key, $default) ?? $default;
-        // return $this->hasSession() ? $this->session()->getOldInput($key, $default) : $default;
+        return session()->getOldInput($key, $default) ?? $default;
+        // return $this->hasSession() ? session()->getOldInput($key, $default) : $default;
     }
 
     /**
@@ -557,7 +557,7 @@ class Request
      */
     public function flash()
     {
-        $this->session()->flashInput($this->all());
+         session()->flashInput($this->all());
     }
 
     /**
@@ -568,7 +568,7 @@ class Request
      */
     public function flashOnly($keys)
     {
-        $this->session()->flashInput(
+        session()->flashInput(
             $this->only(is_array($keys) ? $keys : func_get_args())
         );
     }
@@ -581,7 +581,7 @@ class Request
      */
     public function flashExcept($keys)
     {
-        $this->session()->flashInput(
+        session()->flashInput(
             $this->except(is_array($keys) ? $keys : func_get_args())
         );
     }
@@ -593,7 +593,7 @@ class Request
      */
     public function flush()
     {
-        $this->session()->flashInput([]);
+        session()->flashInput([]);
     }
 
     public function hasSession()
@@ -697,8 +697,8 @@ class Request
 
 
 
-    //修改请求内容
-    public function modify($type='get', $name=null, $value=null)
+    //modify request content
+    public function modify($name=null, $value=null,$type='get')
     {
         $this->_data[$type][$name] =$value;
     }
@@ -785,16 +785,16 @@ class Request
      * @param null $name
      * @return array|null
      */
-    public function file_2($name = null)
-    {
-        if (!isset($this->_data['files'])) {
-            $this->parsePost();
-        }
-        if (null === $name) {
-            return $this->_data['files'];
-        }
-        return isset($this->_data['files'][$name]) ? $this->_data['files'][$name] : null;
-    }
+    // public function file_2($name = null)
+    // {
+    //     if (!isset($this->_data['files'])) {
+    //         $this->parsePost();
+    //     }
+    //     if (null === $name) {
+    //         return $this->_data['files'];
+    //     }
+    //     return isset($this->_data['files'][$name]) ? $this->_data['files'][$name] : null;
+    // }
 
     /**
      * Get method.
@@ -884,11 +884,11 @@ class Request
     public function session()
     {
         if ($this->session === null) {
-            $session_id = $this->sessionId();
+            $session_id = session()->sessionId();
             if ($session_id === false) {
                 return false;
             }
-            $this->session = new Session($session_id);
+            $this->session =session();// new Session($session_id);
         }
         return $this->session;
     }
@@ -900,29 +900,30 @@ class Request
      */
     public function sessionId()
     {
-        if (!isset($this->_data['sid'])) {
-            $session_name = Http::sessionName();
-            $sid = $this->cookie($session_name);
-            if ($sid === '' || $sid === null) {
-                if (0) {
-                    echo('Request->session() fail, header already send');
-                    return false;
-                }
-                $sid = static::createSessionId();
-                $cookie_params = \session_get_cookie_params();
-                $lifetime =config('session.lifetime') ??$cookie_params['lifetime'] ;
+        return session()->sessionId();
+        // if (!isset($this->_data['sid'])) {
+        //     $session_name = Http::sessionName();
+        //     $sid = $this->cookie($session_name);
+        //     if ($sid === '' || $sid === null) {
+        //         if (0) {
+        //             echo('Request->session() fail, header already send');
+        //             return false;
+        //         }
+        //         $sid = static::createSessionId();
+        //         $cookie_params = \session_get_cookie_params();
+        //         $lifetime =config('session.lifetime') ??$cookie_params['lifetime'] ;
 
-                $header= array($session_name . '=' . $sid
-                    . (empty($cookie_params['domain']) ? '' : '; Domain=' . $cookie_params['domain'])
-                    . (empty($lifetime) ? '' : '; Max-Age=' . ($lifetime *60))
-                    . (empty($cookie_params['path']) ? '' : '; Path=' . $cookie_params['path'])
-                    . (empty($cookie_params['samesite']) ? '' : '; SameSite=' . $cookie_params['samesite'])
-                    . (!$cookie_params['secure'] ? '' : '; Secure')
-                    . (!$cookie_params['httponly'] ? '' : '; HttpOnly'));
-                header("Set-Cookie: $header[0]");
-            }
-            $this->_data['sid'] = $sid;
-        }
+        //         $header= array($session_name . '=' . $sid
+        //             . (empty($cookie_params['domain']) ? '' : '; Domain=' . $cookie_params['domain'])
+        //             . (empty($lifetime) ? '' : '; Max-Age=' . ($lifetime *60))
+        //             . (empty($cookie_params['path']) ? '' : '; Path=' . $cookie_params['path'])
+        //             . (empty($cookie_params['samesite']) ? '' : '; SameSite=' . $cookie_params['samesite'])
+        //             . (!$cookie_params['secure'] ? '' : '; Secure')
+        //             . (!$cookie_params['httponly'] ? '' : '; HttpOnly'));
+        //         header("Set-Cookie: $header[0]");
+        //     }
+        //     $this->_data['sid'] = $sid;
+        // }
         return $this->_data['sid'];
     }
 
