@@ -87,10 +87,23 @@ class ErrorHandel
         if ($errorinfostr == "404 Not Found") {
             //"404 Not Found" should throw  by your router
             http_response_code(404);
-            include "../404.html";
+
+
+            if (request()->expectsJson() || request()->isJson()) {
+                echo json_encode(['code'=>404,   'message'=>'error'  ,'content' => $errorinfo]);
+              }else{
+                include "../404.html";
+              }
+
+          
         } elseif ($errorinfostr == "405 Not Allowed") {
             http_response_code(405);
-            echo '<html>
+
+
+            if (request()->expectsJson() || request()->isJson()) {
+                echo json_encode(['code'=>405,   'message'=>'error'  ,'content' => $errorinfostr]);
+              }else{
+                echo '<html>
             <head>
                <title>
                   405 Not Allowed
@@ -108,6 +121,10 @@ class ErrorHandel
                </center>
          </body>
          </html>';
+              }
+
+
+          
         } else {
             http_response_code(500);
             $this->logError($errorinfo, "error");
@@ -115,7 +132,11 @@ class ErrorHandel
                 $errorinfo = "500 Internal Server Error";
             }
 
-            include "../500.html"; //echo $errorinfo in 500.html
+            if (request()->expectsJson() || request()->isJson()) {
+              echo json_encode(['code'=>500,   'message'=>'error'  ,'content' => $errorinfo]);
+            }else{
+                include "../500.html"; //echo $errorinfo in 500.html
+            }
         }
     }
 
