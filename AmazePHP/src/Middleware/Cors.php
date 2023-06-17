@@ -7,7 +7,7 @@ namespace AmazePHP\Middleware;
 use Closure;
 
 /**
- * 跨域请求支持
+ * Cross-origin request support
  */
 class Cors implements \AmazePHP\MiddlewareInterface {
     protected $cookieDomain;
@@ -26,14 +26,14 @@ class Cors implements \AmazePHP\MiddlewareInterface {
     }
 
     /**
-     * 允许跨域请求
+     * Allow cross-origin requests
      * @access public
      * @param Request $request
      * @param Closure $next
      * @param array   $header
      * @return Response
      */
-    public function            process($request, \Closure $next,...$header)       //         handle($request, Closure $next, ? array $header = [])
+    public function  process($request, \Closure $next,...$header)       //         handle($request, Closure $next, ? array $header = [])
     {
 
 

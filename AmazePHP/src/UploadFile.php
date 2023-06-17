@@ -24,8 +24,8 @@ class UploadFile extends \SplFileInfo
      */
     protected $_uploadErrorCode = null;
 
-    private $imageType=["image/gif","image/jpeg","image/jpg","image/png","image/x-png","image/bmp","image/x-ms-bmp","image/pjpeg"];//图片类型
-    private $fileType=["application/zip","application/msexcel","application/xml","application/vnd.ms-excel","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/mspowerpoint","application/vnd.ms-powerpoint","application/pdf","application/x-shockwave-flash","application/x-rar-compressed","application/x-rar","audio/mpeg","audio/x-ms-wma","flv-application/octet-stream","audio/x-ms-wmv","video/mp4","video/x-flv","audio/x-wav","application/msword","video/mpeg"];//文件类型
+    private $imageType=["image/gif","image/jpeg","image/jpg","image/png","image/x-png","image/bmp","image/x-ms-bmp","image/pjpeg"];//image type
+    private $fileType=["application/zip","application/msexcel","application/xml","application/vnd.ms-excel","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/mspowerpoint","application/vnd.ms-powerpoint","application/pdf","application/x-shockwave-flash","application/x-rar-compressed","application/x-rar","audio/mpeg","audio/x-ms-wma","flv-application/octet-stream","audio/x-ms-wmv","video/mp4","video/x-flv","audio/x-wav","application/msword","video/mpeg"];//file type
 
 
     private $tmpName;

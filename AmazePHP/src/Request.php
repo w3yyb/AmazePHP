@@ -121,9 +121,9 @@ class Request
     {
 
         $buffer = '';
-        // (1) 请求行
+        // request line
         $buffer .= $_SERVER['REQUEST_METHOD'].' '.$_SERVER['REQUEST_URI'].' '.$_SERVER['SERVER_PROTOCOL']."\r\n";
-        // (2) 请求Headers
+        // request Headers
         foreach ($_SERVER as $key => $value) {
             if (substr($key, 0, 5) === 'HTTP_') {
                 $key = substr($key, 5);
@@ -131,9 +131,9 @@ class Request
                 $buffer .= $key.': '.$value."\r\n";
             }
         }
-        // (3) 空行
+        // (3) space line
         $buffer .= "\r\n";
-        // (4) 请求Body  如果请求header里Contente-Type是 multipart/form-data,或application/x-www-form-urlencoded或application/octet-stream则需要用 $_POST($_GET)或$_FILES来接收.
+        // If the Contente-Type in the request header is multipart/form-data, or application/x-www-form-urlencoded or application/octet-stream, you need to receive it with $_POST($_GET) or $_FILES..
         $buffer .= file_get_contents('php://input');
         // var_dump($raw);exit;
 

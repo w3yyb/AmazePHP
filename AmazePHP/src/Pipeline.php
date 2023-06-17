@@ -124,7 +124,7 @@ class Pipeline
         return function ($object) use ($nextLayer, $layer, $parameters) {
             $response= $layer->process($object, $nextLayer, $parameters);
             //  if (!$response instanceof Response){
-            //      throw new \Exception("中间件必须返回response对象", 1);
+            //      throw new \Exception("The middleware must return a response object", 1);
             //  }
              return $response;
         };
