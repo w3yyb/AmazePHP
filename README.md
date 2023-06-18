@@ -249,6 +249,24 @@ return [
 #### Register routing middleware 
 See Routing.
 
+### Facades 
+The façade provides a static call interface for the (dynamic) classes of the framework's core class library.Enables you to statically call dynamic class methods .
+#### sample:
+In App\Controllers\Index Controller:
+
+```
+<?php
+namespace App\Controllers;
+use AmazePHP\Facade\Request;
+class Index  
+{
+    public function index()
+    {
+        echo Request::url();//call Request.php url method statically. Same as calling  Request->url().
+    }
+}
+```
+All façades of the system are placed in the AmazePHP/src/Facade directory.
     
 ### http client 
 ```
