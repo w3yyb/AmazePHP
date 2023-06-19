@@ -17,7 +17,8 @@
       "spatie/macroable": "^2.0",
       "eftec/cacheone": "^2.16",
       "eftec/pdoone": "^4.2",
-      "doctrine/event-manager": "^2.0"
+      "doctrine/event-manager": "^2.0",
+    "illuminate/container": "^10.13"
   },
   "autoload": {
       "psr-4": {

@@ -8,7 +8,7 @@ use SplFileInfo as SplFileInfo;
 
 class LoadConfiguration
 {
-    use SingletonTrait;
+    // use SingletonTrait;
     public $repo;
     /**
      * Bootstrap the given application.

@@ -18,6 +18,6 @@ class Request extends Facade
      */
     protected static function getFacadeClass()
     {
-        return  RequestClass::getInstance();
+        return  RequestClass::class;
     }
 }

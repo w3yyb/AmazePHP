@@ -5,7 +5,7 @@ use eftec\CacheOne;
 
 class Cache
 {
-    use SingletonTrait;
+    // use SingletonTrait;
 
     private $cache;
 

@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
+use Illuminate\Container\Container;
 
 final class ConfigTest extends TestCase
 {
@@ -22,6 +23,10 @@ final class ConfigTest extends TestCase
             define('BASE_PATH', __DIR__ . '/..');
 
         }
+
+$container =   Container::getInstance();
+$container->singleton('AmazePHP\LoadConfiguration', 'AmazePHP\LoadConfiguration');
+
        
         config(['app.timezone' => 'America/Chicago']);
 

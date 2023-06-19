@@ -1,10 +1,11 @@
 <?php
 namespace AmazePHP;
 
+use Illuminate\Container\Container;
 
 class UrlGenerator
 {
-    use SingletonTrait;
+    // use SingletonTrait;
 
     // private $cache;
 
@@ -70,7 +71,9 @@ class UrlGenerator
 
     protected function getPreviousUrlFromSession()
     {
-        $session = Session::getInstance();// $this->getSession();
+        Container::getInstance()->singleton('Session', 'Session');
+
+        $session = Container::getInstance()->make(Session::class);
 
         return $session ? $session->previousUrl() : null;
     }

@@ -17,6 +17,6 @@ class UrlGenerator extends Facade
      */
     protected static function getFacadeClass()
     {
-        return  UrlGeneratorClass::getInstance();
+        return   UrlGeneratorClass::class;
     }
 }

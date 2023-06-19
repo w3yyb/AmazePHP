@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 use AmazePHP\Router;
 use PHPUnit\Framework\TestCase;
+use Illuminate\Container\Container;
 
 final class UrlTest extends TestCase
 {
@@ -34,8 +35,8 @@ final class UrlTest extends TestCase
     ]]]);
 
 
-
-    $router = Router::getInstance();
+    Container::getInstance()->singleton('Router', 'Router');
+    $router = Container::getInstance()->make(Router::class);
 foreach (config('route') as $key => $value) {
     $router->addRoute($value[0][0], $value[1], $value[2], $value[3] ?? null);
 }

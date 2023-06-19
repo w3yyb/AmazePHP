@@ -1,19 +1,23 @@
 <?php
 namespace AmazePHP;
+use Illuminate\Container\Container;
 
 class Router
 {
-    use SingletonTrait;
+    // use SingletonTrait;
+
     private $routes = [];
     private $routeCount = 0;
     protected static $_nameList = [];
     private $_path = [];
 
+    public function __construct()
+    {
+        $this->container =   Container::getInstance();
+    }
+
     public function addRoute($method, $url, $callback, $name = null, $middleware = null)
     {
-        if ($url !== '/') {//Remove the trailing slash of the URL
-            while ($url !== $url = rtrim($url, '/'));//The trailing slash of the URL should not be removed, it should be changed later
-        }
 
         $this->routes[] = ['method' => $method, 'url' => $url, 'callback' => $callback, 'middleware' => $middleware];
         $this->name($name);
@@ -40,8 +44,8 @@ class Router
         foreach ($this->routes as $route) {
             // convert urls like '/users/:uid/posts/:pid' to regular expression
 
-            $patterns = array('/\[{[a-zA-Z0-9\_\-}]+\]/','/{[a-zA-Z0-9\_\-}]+/');
-            $replace = array('([a-zA-Z0-9\-\_]*)','([a-zA-Z0-9\-\_]+)');
+            $patterns = array('/\[[a-zA-Z0-9\_\-\/]+\]/','/\[{[a-zA-Z0-9\_\-}]+\]/','/\[\/{[a-zA-Z0-9\_\-}]+\]/','/{[a-zA-Z0-9\_\-}]+/');
+            $replace = array('([a-zA-Z0-9\-\_\/]*)','([a-zA-Z0-9\-\_]*)','([a-zA-Z0-9\-\_\/]*)','([a-zA-Z0-9\-\_]+)');
 
 
             // $pattern = "@^" . preg_replace('/\\\:[a-zA-Z0-9\_\-]+/', '([a-zA-Z0-9\-\_]+)', preg_quote($route['url'])) . "$@D";
@@ -68,11 +72,29 @@ class Router
                     throw new \Exception("405 Not Allowed");
                 }
 
-                $request =  Request::getInstance();
+                $request =  Container::getInstance()->make('Request');
 
                 return    (new  Pipeline())->through($route['middleware'])
                 ->then($request, function () use ($route, $matches) {
-                    echo  call_user_func_array($route['callback'], $matches);
+
+
+                    preg_match_all("/{[a-zA-Z0-9\_\-}]+/", $route['url'], $matches1);
+
+                    foreach ($matches1[0] as $key => $value) {
+                         $matches[trim($value,"{}")]= $matches[$key] ?? null;
+                    }
+
+                    foreach ($matches as $mkey => &$mvalue) {
+
+                        $mvalue =trim( (string)$mvalue,"/");
+
+                        if (is_null($mvalue )  || empty($mvalue) ){
+                            unset($matches[$mkey]);
+                        }
+                    }
+
+                    // echo  call_user_func_array($route['callback'], $matches);
+                    echo $this->container->call($route['callback'], $matches);
                 });
             } else {
                 $is_match++;

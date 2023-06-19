@@ -7,7 +7,7 @@ use AmazePHP\FileSessionHandler;
  */
 class Session
 {
-    use SingletonTrait;
+    // use SingletonTrait;
     /**
      * Session andler class which implements SessionHandlerInterface.
      *

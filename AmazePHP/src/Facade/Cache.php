@@ -17,6 +17,6 @@ class Cache extends Facade
      */
     protected static function getFacadeClass()
     {
-        return  CacheClass::getInstance();
+        return   CacheClass::class;
     }
 }

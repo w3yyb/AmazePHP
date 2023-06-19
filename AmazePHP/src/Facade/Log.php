@@ -16,6 +16,6 @@ class Log extends Facade
      */
     protected static function getFacadeClass()
     {
-        return  LogClass::getInstance();
+        return  LogClass::class;
     }
 }

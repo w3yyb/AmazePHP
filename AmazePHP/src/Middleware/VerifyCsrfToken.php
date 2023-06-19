@@ -17,7 +17,7 @@ use AmazePHP\SingletonTrait;
 class VerifyCsrfToken implements \AmazePHP\MiddlewareInterface
 {
     use InteractsWithTime;
-    use SingletonTrait;
+    // use SingletonTrait;
 
 
  

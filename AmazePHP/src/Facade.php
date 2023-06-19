@@ -1,7 +1,8 @@
 <?php
- 
+
 namespace AmazePHP;
 
+use Illuminate\Container\Container;
 
 /**
  * Facade
@@ -37,8 +38,13 @@ class Facade
             $newInstance = true;
         }
 
-        return  $class;
-        // return Container::getInstance()->make($class, $args, $newInstance);
+
+
+        if (is_object($class)) {
+            return  $class;
+        } else {
+            return Container::getInstance()->make($class, $args, $newInstance);
+        }
     }
 
     /**
@@ -47,7 +53,8 @@ class Facade
      * @return string
      */
     protected static function getFacadeClass()
-    {}
+    {
+    }
 
     /**
      * Instantiates the current Facade class with parameters

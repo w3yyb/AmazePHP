@@ -17,6 +17,6 @@ class DB extends Facade
      */
     protected static function getFacadeClass()
     {
-        return  DBClass::getInstance();
+        return   DBClass::class;
     }
 }

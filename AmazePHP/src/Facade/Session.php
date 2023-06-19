@@ -16,6 +16,6 @@ class Session extends Facade
      */
     protected static function getFacadeClass()
     {
-        return  SessionClass::getInstance();
+        return SessionClass::class;
     }
 }

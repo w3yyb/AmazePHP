@@ -10,6 +10,7 @@ use AmazePHP\DB;
 use AmazePHP\Session;
 use AmazePHP\UrlGenerator;
 use AmazePHP\Router;
+use Illuminate\Container\Container;
 function env($key, $default = null)
 {
     $apcu_key="env$key";
@@ -74,7 +75,7 @@ function value($value, ...$args)
 
 function request()
 {
-    return Request::getInstance();
+    return Container::getInstance()->make(Request::class);
 }
 
 function view($view = null, $data = [])
@@ -93,8 +94,8 @@ function config($key = null, $default = null)
 if (!isset($GLOBALS['dotenv'])) {
     (new DotEnv());
 }
-
-    $config= LoadConfiguration::getInstance();
+// Container::getInstance()->singleton('LoadConfiguration', 'AmazePHP\LoadConfiguration');
+    $config= Container::getInstance()->make(LoadConfiguration::class);
     if (is_null($key)) {
         return  $config;
     }
@@ -111,8 +112,8 @@ if (!isset($GLOBALS['dotenv'])) {
 function cache()
 {
     $arguments = func_get_args();
-
-    $cache= Cache::getInstance();
+    Container::getInstance()->singleton('Cache', 'Cache');
+    $cache= Container::getInstance()->make(Cache::class);
 
 
     if (empty($arguments)) {
@@ -279,7 +280,10 @@ function session($key = null, $default = null)
             if ($session_id === false) {
                 return false;
             }
-            $session = Session::getInstance();
+
+
+            Container::getInstance()->singleton('Session', 'Session');
+            $session = Container::getInstance()->make(Session::class);
         }
         return $session;
     }
@@ -297,18 +301,20 @@ function session($key = null, $default = null)
 
     function db()
     {
-        $db=DB::getInstance();
+        Container::getInstance()->singleton('DB', 'DB');
+        $db=Container::getInstance()->make(DB::class);
        
         return $db;
     }
 
     function url($path = null, $parameters = [], $secure = null)
     {
+        Container::getInstance()->singleton('UrlGenerator', 'UrlGenerator');
         if (is_null($path)) {
-            return UrlGenerator::getInstance();
+            return Container::getInstance()->make(UrlGenerator::class);
         }
 
-        return (UrlGenerator::getInstance())->to($path, $parameters, $secure);
+        return (Container::getInstance()->make(UrlGenerator::class))->to($path, $parameters, $secure);
     }
 
     /**
@@ -318,7 +324,7 @@ function session($key = null, $default = null)
  */
 function route($name, $parameters = [])
 {
-    $Route=Router::getInstance();
+    $Route=Container::getInstance()->make(Router::class);
     $route = $Route::getByRouteName($name);
     if (!$route) {
         return $name;

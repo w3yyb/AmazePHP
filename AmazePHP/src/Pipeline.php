@@ -5,6 +5,7 @@ namespace AmazePHP;
 use InvalidArgumentException as InvalidArgumentException ;
 use Closure as Closure;
 use MiddlewareInterface as MiddlewareInterface;
+use Illuminate\Container\Container;
 
 class Pipeline
 {
@@ -12,7 +13,13 @@ class Pipeline
 
     public function __construct(array $pipes = [])
     {
+        $this->container =   Container::getInstance();
         $this->pipes = $pipes;
+    }
+
+    public function getContainer()
+    {
+        return $this->container;
     }
 
     /**
@@ -118,7 +125,7 @@ class Pipeline
     {
         if (!\is_object($layer)) {
             [$name, $parameters] = $this->parsePipeString($layer);
-            $layer =new $name;
+            $layer = new $name;//$this->getContainer()->make($name);
         }
         $parameters=$parameters ?? [];
         return function ($object) use ($nextLayer, $layer, $parameters) {

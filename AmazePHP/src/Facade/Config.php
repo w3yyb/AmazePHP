@@ -5,7 +5,7 @@ declare (strict_types = 1);
 namespace AmazePHP\Facade;
 
 
-use AmazePHP\LoadConfiguration;
+use AmazePHP\LoadConfiguration as LoadConfigurationClass;
 use AmazePHP\Facade;
 
  
@@ -18,6 +18,6 @@ class Config extends Facade
      */
     protected static function getFacadeClass()
     {
-        return LoadConfiguration::getInstance();
+        return  LoadConfigurationClass::class;
     }
 }

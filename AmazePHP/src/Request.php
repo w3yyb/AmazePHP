@@ -13,7 +13,7 @@ namespace AmazePHP;
  */
 class Request  
 {
-    use SingletonTrait;
+    // use SingletonTrait;
     
      
     public const HEADER_FORWARDED = 0b000001; // When using RFC 7239
@@ -119,6 +119,8 @@ class Request
      */
     public function __construct($buffer='')
     {
+// debug_print_backtrace();
+        // var_dump($this);
 
         $buffer = '';
         // request line

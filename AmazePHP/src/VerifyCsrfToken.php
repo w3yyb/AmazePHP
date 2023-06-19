@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 class VerifyCsrfToken  
 {
     use InteractsWithTime;
-    use SingletonTrait;
+    // use SingletonTrait;
 
 
  
