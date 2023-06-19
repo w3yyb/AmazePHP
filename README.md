@@ -11,6 +11,7 @@ There are no complicated concepts, so it has the lowest learning curve.
 - Controllers 
 - Middleware 
 - Facades 
+- Container 
 - Database  
 - Http Client  
 - Logging   
