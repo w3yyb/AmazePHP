@@ -126,7 +126,7 @@ The first line is the HTTP request method, which supports HEAD, GET, POST, PUT, 
 
 The second line represents the path, like `/users/{uid}/posts/[{pid}][/]`:  in curly braces is variable parameters , optional parameters in brackets, i.e. parameters that have not passed in the URL, `[/]` for remove the trailing slash.  
 
-The third line indicates PHP callbacks, support for object methods, static methods of classes, anonymous functions, functions, etc. 
+The third line indicates PHP callbacks, support for class methods, static methods of classes, anonymous functions, functions, etc. 
 
 The fourth line is optional and indicates the name of the named route. 
 
