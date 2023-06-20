@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Container\Container;
 
 use AmazePHP\Router;
@@ -6,6 +7,7 @@ use AmazePHP\VerifyCsrfToken;
 use AmazePHP\Request;
 use AmazePHP\LoadConfiguration;
 use AmazePHP\Log;
+
 define('BASE_PATH', __DIR__);
 define('APP_VERSION', '2.2.2');
 include 'AmazePHP/src/DotEnv.php';
@@ -22,11 +24,11 @@ $container->singleton('Router', 'Router');
 $container->singleton('AmazePHP\LoadConfiguration', 'AmazePHP\LoadConfiguration');
 $container->singleton('AmazePHP\DB', 'AmazePHP\DB');
 
-$container->make( LoadConfiguration::class);
+$container->make(LoadConfiguration::class);
 
 
 $container->singleton('AmazePHP\Cache', 'AmazePHP\Cache');
- $router = $container->make(Router::class);
+$router = $container->make(Router::class);
 
 // $router = Router::getInstance();
 foreach (config('route') as $key => $value) {
@@ -34,7 +36,7 @@ foreach (config('route') as $key => $value) {
 }
 
 $container->singleton('AmazePHP\Request', 'AmazePHP\Request');
-$container->singleton('Request', 'AmazePHP\Request');	
+$container->singleton('Request', 'AmazePHP\Request');
 
 $request = $container->make('Request');
 
@@ -42,9 +44,9 @@ $request = $container->make('Request');
 
 
 $middleware =require BASE_PATH.'/config/middleware.php';
- 
+
 return    (new AmazePHP\Pipeline())->through($middleware)
-->then($request ,function () use ($router) {
+->then($request, function () use ($router) {
     $response =$router->doRouting();
     if ($response !== null) {
         echo $response;

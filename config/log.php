@@ -7,7 +7,7 @@ return [
             [
                 'class' => Monolog\Handler\RotatingFileHandler::class,
                 'constructor' => [
-                    BASE_PATH.'/cache/log.log',
+                    BASE_PATH.'/cache/logs/log.log',
                     Monolog\Logger::DEBUG,
                 ],
                 'formatter' => [
