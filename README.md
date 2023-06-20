@@ -268,6 +268,32 @@ class Index
 }
 ```
 All façades of the system are placed in the AmazePHP/src/Facade directory.
+
+
+### Container 
+ Container is a powerful tool for managing class dependencies and performing dependency injection.
+
+ #### usage:
+For example:
+```
+<?php
+namespace App\Controllers;
+use AmazePHP\Request;
+class Foo  
+{
+    public function bar(Request $request, $id)
+    {
+    echo $request->url();
+    }
+}
+?>
+```
+The bar method depends on the Request class.You can put the Request $request in the bar parameters.Frameword will auto call the Request class,so you can use the Request class method:e.g. ` $request->url() ` .  
+Scenarios that support the use of dependency injection include (but are not limited to): 
+- controller architecture approach;
+- Controller operation method;
+- closure definition of a route;
+- Middleware execution methods;
     
 ### http client 
 ```
