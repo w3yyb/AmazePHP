@@ -7,7 +7,7 @@ use AmazePHP\Request;
 use AmazePHP\LoadConfiguration;
 use AmazePHP\Log;
 define('BASE_PATH', __DIR__);
-define('APP_VERSION', '2.2.1');
+define('APP_VERSION', '2.2.2');
 include 'AmazePHP/src/DotEnv.php';
 include 'AmazePHP/src/ErrorHandel.php';
 (new AmazePHP\DotEnv());

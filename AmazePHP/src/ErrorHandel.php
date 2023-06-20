@@ -92,7 +92,7 @@ class ErrorHandel
             if (request()->expectsJson() || request()->isJson()) {
                 echo json_encode(['code'=>404,   'message'=>'error'  ,'content' => $errorinfo]);
               }else{
-                include "../404.html";
+                include __DIR__. "/Tpl/404.html";
               }
 
           
@@ -135,7 +135,7 @@ class ErrorHandel
             if (request()->expectsJson() || request()->isJson()) {
               echo json_encode(['code'=>500,   'message'=>'error'  ,'content' => $errorinfo]);
             }else{
-                include "../500.html"; //echo $errorinfo in 500.html
+                include __DIR__. "/Tpl/500.html";
             }
         }
     }
