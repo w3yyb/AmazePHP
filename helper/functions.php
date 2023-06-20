@@ -11,6 +11,7 @@ use AmazePHP\Session;
 use AmazePHP\UrlGenerator;
 use AmazePHP\Router;
 use Illuminate\Container\Container;
+
 function env($key, $default = null)
 {
     $apcu_key="env$key";
@@ -39,7 +40,7 @@ function env($key, $default = null)
     }
 
     $value = getenv($key);
-    if(function_exists('apcu_store')){
+    if(function_exists('apcu_store')) {
         apcu_store($apcu_key, $value, 60);
     }
 
@@ -91,10 +92,10 @@ function view($view = null, $data = [])
 function config($key = null, $default = null)
 {
 
-if (!isset($GLOBALS['dotenv'])) {
-    (new DotEnv());
-}
-// Container::getInstance()->singleton('LoadConfiguration', 'AmazePHP\LoadConfiguration');
+    if (!isset($GLOBALS['dotenv'])) {
+        (new DotEnv());
+    }
+    // Container::getInstance()->singleton('LoadConfiguration', 'AmazePHP\LoadConfiguration');
     $config= Container::getInstance()->make(LoadConfiguration::class);
     if (is_null($key)) {
         return  $config;
@@ -155,7 +156,7 @@ Log::info($message);
 Log::debug($message);
 
  */
-function logger($msg, $type='error')
+function logger($msg, $type = 'error')
 {
     $log=new Log();
     $log::$type($msg);
@@ -164,47 +165,47 @@ function logger($msg, $type='error')
 
 /**
  * The function executes an HTTP request using the GuzzleHttp library in PHP and returns a response status code, body, and headers.
- * 
+ *
  * @param url The URL of the HTTP request you want to make.
  * @param method The HTTP method used for the request. It can be GET、HEAD or DELETE. By default, it is set to GET.
  * @param header An array of optional headers sent with the request.
- * 
+ *
  * @return An array containing three elements: "status_code", "body", and "header".  The 'status_code' element contains the HTTP status code of the response, 'body' element contains the response body as a string, and the 'header' element contains an array of response headers.
  */
 function httpRequest($url, $method = 'GET', $header = [])
 {
 
-        $client = new \GuzzleHttp\Client();
-        $response = $client->request($method, $url, [
-            'headers' => $header
-        ]);
+    $client = new \GuzzleHttp\Client();
+    $response = $client->request($method, $url, [
+        'headers' => $header
+    ]);
 
-        $content= [];
-        $content['status_code']= $response->getStatusCode();
-        $content['body']= (string) $response->getBody();
-        $content['header']= $response->getHeaders();
-        return $content;
+    $content= [];
+    $content['status_code']= $response->getStatusCode();
+    $content['body']= (string) $response->getBody();
+    $content['header']= $response->getHeaders();
+    return $content;
 }
 
-function httpGet($url,$header = [])
+function httpGet($url, $header = [])
 {
-  return httpRequest($url,'GET',$header);
+    return httpRequest($url, 'GET', $header);
 }
 
-function httpHead($url,$header = [])
+function httpHead($url, $header = [])
 {
-  return httpRequest($url,'HEAD',$header);
+    return httpRequest($url, 'HEAD', $header);
 }
 
-function httpDelete($url,$header = [])
+function httpDelete($url, $header = [])
 {
-  return httpRequest($url,'DELETE',$header);
+    return httpRequest($url, 'DELETE', $header);
 }
 
 
 /* This function uses the specified method (POST, PUT, or PATCH) and data to send an HTTP request to the specified URL. The data can be used as JSON
 or regular format data sending. The function returns the response status code, body, and headers as an array. Header parameters are optional and can be used to send additional headers with the request. */
-function httpSend($url, $data, $isJson = true,$method='POST',$header = [])
+function httpSend($url, $data, $isJson = true, $method = 'POST', $header = [])
 {
     $client = new \GuzzleHttp\Client();
     if ($isJson) {
@@ -234,19 +235,19 @@ function httpSend($url, $data, $isJson = true,$method='POST',$header = [])
 }
 
 
-function httpPost($url, $data, $isJson = true,$method='POST',$header = [])
+function httpPost($url, $data, $isJson = true, $method = 'POST', $header = [])
 {
-  return  httpSend($url, $data, $isJson ,$method,$header);
+    return  httpSend($url, $data, $isJson, $method, $header);
 }
 
-function httpPut($url, $data, $isJson = true,$method='PUT',$header = [])
+function httpPut($url, $data, $isJson = true, $method = 'PUT', $header = [])
 {
-  return  httpSend($url, $data, $isJson ,$method,$header);
+    return  httpSend($url, $data, $isJson, $method, $header);
 }
 
-function httpPatch($url, $data, $isJson = true,$method='PATCH',$header = [])
+function httpPatch($url, $data, $isJson = true, $method = 'PATCH', $header = [])
 {
-  return  httpSend($url, $data, $isJson ,$method,$header);
+    return  httpSend($url, $data, $isJson, $method, $header);
 }
 
 /**
@@ -267,57 +268,57 @@ function session($key = null, $default = null)
     return $session->get($key, $default);
 }
 
-    /**
-     * Get session.
-     *
-     * @return bool
-     */
-     function getSession()
-    {
-        $session=null;
-        if ($session === null) {
-            $session_id = sessionId();
-            if ($session_id === false) {
-                return false;
-            }
-
-
-            Container::getInstance()->singleton('Session', 'Session');
-            $session = Container::getInstance()->make(Session::class);
-        }
-        return $session;
-    }
-
-
-     /**
-     * Get session id.
-     *
-     * @return bool|mixed
-     */
-     function sessionId()
-    {
-        return  md5(uniqid('', true));
-    }
-
-    function db()
-    {
-        Container::getInstance()->singleton('DB', 'DB');
-        $db=Container::getInstance()->make(DB::class);
-       
-        return $db;
-    }
-
-    function url($path = null, $parameters = [], $secure = null)
-    {
-        Container::getInstance()->singleton('UrlGenerator', 'UrlGenerator');
-        if (is_null($path)) {
-            return Container::getInstance()->make(UrlGenerator::class);
+/**
+ * Get session.
+ *
+ * @return bool
+ */
+function getSession()
+{
+    $session=null;
+    if ($session === null) {
+        $session_id = sessionId();
+        if ($session_id === false) {
+            return false;
         }
 
-        return (Container::getInstance()->make(UrlGenerator::class))->to($path, $parameters, $secure);
+
+        Container::getInstance()->singleton('Session', 'Session');
+        $session = Container::getInstance()->make(Session::class);
+    }
+    return $session;
+}
+
+
+/**
+* Get session id.
+*
+* @return bool|mixed
+*/
+function sessionId()
+{
+    return  md5(uniqid('', true));
+}
+
+function db()
+{
+    Container::getInstance()->singleton('DB', 'DB');
+    $db=Container::getInstance()->make(DB::class);
+
+    return $db;
+}
+
+function url($path = null, $parameters = [], $secure = null)
+{
+    Container::getInstance()->singleton('UrlGenerator', 'UrlGenerator');
+    if (is_null($path)) {
+        return Container::getInstance()->make(UrlGenerator::class);
     }
 
-    /**
+    return (Container::getInstance()->make(UrlGenerator::class))->to($path, $parameters, $secure);
+}
+
+/**
  * @param $name
  * @param array $parameters
  * @return string
@@ -329,17 +330,17 @@ function route($name, $parameters = [])
     if (!$route) {
         return $name;
     }
-    return  (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]".$route->url($name,$parameters);
+    return  (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]".$route->url($name, $parameters);
 }
 
-function cookie($name, $value = '', $max_age = 0, $path = '/', $domain = '', $secure = false, $http_only = false, $samesite='None')
+function cookie($name, $value = '', $max_age = 0, $path = '/', $domain = '', $secure = false, $http_only = false, $samesite = 'None')
 {
     if (!headers_sent()) {
-        $arr_cookie_options = array (
-            'expires' =>$max_age +time(), 
-            'path' => $path, 
+        $arr_cookie_options = array(
+            'expires' =>$max_age +time(),
+            'path' => $path,
             'domain' => $domain,
-            'secure' => $secure, 
+            'secure' => $secure,
             'httponly' => $http_only,
             'samesite' => $samesite // None || Lax  || Strict
             );
@@ -388,41 +389,41 @@ if (! function_exists('csrf_token')) {
      *
      * @return string[string] The HTTP header key/value pairs.
      */
-    function get_all_headers()
-    {
-        $headers = array();
+function get_all_headers()
+{
+    $headers = array();
 
-        $copy_server = array(
-            'CONTENT_TYPE'   => 'Content-Type',
-            'CONTENT_LENGTH' => 'Content-Length',
-            'CONTENT_MD5'    => 'Content-Md5',
-        );
+    $copy_server = array(
+        'CONTENT_TYPE'   => 'Content-Type',
+        'CONTENT_LENGTH' => 'Content-Length',
+        'CONTENT_MD5'    => 'Content-Md5',
+    );
 
-        foreach ($_SERVER as $key => $value) {
-            if (substr($key, 0, 5) === 'HTTP_') {
-                $key = substr($key, 5);
-                if (!isset($copy_server[$key]) || !isset($_SERVER[$key])) {
-                    $key = str_replace(' ', '-', strtolower(str_replace('_', ' ', $key)));
-                    $headers[$key] = $value;
-                }
-            } elseif (isset($copy_server[$key])) {
-                $headers[$copy_server[$key]] = $value;
+    foreach ($_SERVER as $key => $value) {
+        if (substr($key, 0, 5) === 'HTTP_') {
+            $key = substr($key, 5);
+            if (!isset($copy_server[$key]) || !isset($_SERVER[$key])) {
+                $key = str_replace(' ', '-', strtolower(str_replace('_', ' ', $key)));
+                $headers[$key] = $value;
             }
+        } elseif (isset($copy_server[$key])) {
+            $headers[$copy_server[$key]] = $value;
         }
-
-        if (!isset($headers['Authorization'])) {
-            if (isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])) {
-                $headers['Authorization'] = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
-            } elseif (isset($_SERVER['PHP_AUTH_USER'])) {
-                $basic_pass = isset($_SERVER['PHP_AUTH_PW']) ? $_SERVER['PHP_AUTH_PW'] : '';
-                $headers['Authorization'] = 'Basic ' . base64_encode($_SERVER['PHP_AUTH_USER'] . ':' . $basic_pass);
-            } elseif (isset($_SERVER['PHP_AUTH_DIGEST'])) {
-                $headers['Authorization'] = $_SERVER['PHP_AUTH_DIGEST'];
-            }
-        }
-
-        return $headers;
     }
+
+    if (!isset($headers['Authorization'])) {
+        if (isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])) {
+            $headers['Authorization'] = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
+        } elseif (isset($_SERVER['PHP_AUTH_USER'])) {
+            $basic_pass = isset($_SERVER['PHP_AUTH_PW']) ? $_SERVER['PHP_AUTH_PW'] : '';
+            $headers['Authorization'] = 'Basic ' . base64_encode($_SERVER['PHP_AUTH_USER'] . ':' . $basic_pass);
+        } elseif (isset($_SERVER['PHP_AUTH_DIGEST'])) {
+            $headers['Authorization'] = $_SERVER['PHP_AUTH_DIGEST'];
+        }
+    }
+
+    return $headers;
+}
 
 /**
  * @param $data
