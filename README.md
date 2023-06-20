@@ -27,6 +27,8 @@ There are no complicated concepts, so it has the lowest learning curve.
 ## Installation:    
 ```
 git clone https://github.com/w3yyb/AmazePHP.git  
+or 
+composer create-project amazephp/amazephp
 
 cd AmazePHP 
 
