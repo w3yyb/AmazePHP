@@ -288,10 +288,9 @@ class Foo
 }
 ?>
 ```
-The bar method depends on the Request class.You can put the Request $request in the bar parameters.Frameword will auto call the Request class,so you can use the Request class method:e.g. ` $request->url() ` .  
+The bar method depends on the Request class.You can put the Request $request in the bar parameters.Framework will auto call the Request class,so you can use the Request class method:e.g. ` $request->url() ` .  
 Scenarios that support the use of dependency injection include (but are not limited to): 
-- controller architecture approach;
-- Controller operation method;
+- Controller   method;
 - closure definition of a route;
 - Middleware execution methods;
     
