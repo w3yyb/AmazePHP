@@ -1,5 +1,7 @@
 <?php
+
 namespace AmazePHP;
+
 use Illuminate\Container\Container;
 
 class Router
@@ -10,6 +12,7 @@ class Router
     private $routeCount = 0;
     protected static $_nameList = [];
     private $_path = [];
+    private $container;
 
     public function __construct()
     {
@@ -81,20 +84,24 @@ class Router
                     preg_match_all("/{[a-zA-Z0-9\_\-}]+/", $route['url'], $matches1);
 
                     foreach ($matches1[0] as $key => $value) {
-                         $matches[trim($value,"{}")]= $matches[$key] ?? null;
+                        $matches[trim($value, "{}")]= $matches[$key] ?? null;
                     }
 
                     foreach ($matches as $mkey => &$mvalue) {
+                        $mvalue =trim((string)$mvalue, "/");
 
-                        $mvalue =trim( (string)$mvalue,"/");
-
-                        if (is_null($mvalue )  || empty($mvalue) ){
+                        if (is_null($mvalue)  || empty($mvalue)) {
                             unset($matches[$mkey]);
                         }
                     }
 
-                    // echo  call_user_func_array($route['callback'], $matches);
-                    echo $this->container->call($route['callback'], $matches);
+                    if ($route['callback'] instanceof \Closure) {
+                        echo $this->container->call($route['callback'], $matches);
+                    } else {
+                        $controller= $this->container->make($route['callback'][0]);
+                        // echo  call_user_func_array($route['callback'], $matches);
+                        echo $this->container->call([$controller, $route['callback'][1]], $matches);
+                    }
                 });
             } else {
                 $is_match++;
@@ -139,9 +146,3 @@ class Router
         return $this;
     }
 }
-
-
-//autoload
-// spl_autoload_register(function ($class_name) {
-//     require_once __DIR__ . '/' .  str_replace('\\', '/', $class_name) . '.php';
-// });

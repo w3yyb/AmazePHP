@@ -5,7 +5,7 @@ return [
     [
         ['GET'],
         '/',
-        [new App\Controllers\Index, 'index'],
+        [App\Controllers\Index::class, 'index'],
         'nameroute1'//name route (optional)
     ],
 

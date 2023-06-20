@@ -117,7 +117,7 @@ see config/route.php
   [
         ['GET'], 
         '/',  
-        [new App\Index, 'index'],
+        [App\Controllers\Index::class, 'index'],
         ['routename'],
         'middleware'=>[App\Middleware\a2Middleware::class,App\Middleware\b2Middleware::class],
   ],
