@@ -1,7 +1,6 @@
 <?php
 
 namespace AmazePHP;
- 
 
 use Exception as Exception;
 use SplFileInfo as SplFileInfo;
@@ -15,7 +14,7 @@ class LoadConfiguration
      *
      * @return void
      */
-    public function __construct( )
+    public function __construct()
     {
         $apcu_key="config";
         $items = [];
@@ -48,7 +47,7 @@ class LoadConfiguration
 
         if (! isset($loadedFromCache)) {
             $this->loadConfigurationFiles($config_path, $repository);
-           //apcu_store($apcu_key, $repository->all(), 6);
+            //apcu_store($apcu_key, $repository->all(), 6);
 
         }
 
@@ -64,34 +63,107 @@ class LoadConfiguration
         mb_internal_encoding('UTF-8');
     }
 
-    public function get($key,$val=null){
+    public function get($key, $default=null)
+    {
 
-        return $this->repo->get($key,$val);
+        return $this->repo->get($key, $default);
+
+    }
+
+
+    public function set($key, $value = null)
+    {
+
+        return $this->repo->set($key, $value);
 
     }
 
 
-    public function set( array $key){
+    public function all()
+    {
 
-        return $this->repo->set($key);
+        return $this->repo->all();
 
     }
+
+
+    public function has($key)
+    {
+
+        return $this->repo->has($key);
+
+    }
+
+
+    public function getMany($key)
+    {
+
+        return $this->repo->getMany($key);
+
+    }
+
+
+    public function prepend($key, $value)
+    {
+
+        return $this->repo->prepend($key, $value);
+
+    }
+
+
+    public function push($key, $value)
+    {
+
+        return $this->repo->push($key, $value);
+
+    }
+
+    public function offsetExists(mixed $key)
+    {
+
+        return $this->repo->offsetExists($key);
+
+    }
+
+    public function offsetGet($key)
+    {
+
+        return $this->repo->offsetGet($key);
+
+    }
+
+
+    public function offsetSet($key, $value)
+    {
+
+        return $this->repo->offsetSet($key, $value);
+
+    }
+
+
+    public function offsetUnset($key)
+    {
+
+        return $this->repo->offsetUnset($key);
+
+    }
+
 
     /**
      * Load the configuration items from all of the files.
      *
- 
+
      * @return void
      *
      * @throws \Exception
      */
-    protected function loadConfigurationFiles( $config_path,$repository)
+    protected function loadConfigurationFiles($config_path, $repository)
     {
 
         $files = $this->getConfigurationFiles($config_path);
 
         if (! isset($files['app'])) {
-          //  throw new Exception('Unable to load the "app" configuration file.');
+            //  throw new Exception('Unable to load the "app" configuration file.');
         }
 
         foreach ($files as $key => $path) {
@@ -104,14 +176,14 @@ class LoadConfiguration
      *
      * @return array
      */
-    protected function getConfigurationFiles( $config_path)
+    protected function getConfigurationFiles($config_path)
     {
         $files = [];
 
         $configPath = realpath($config_path);
 
 
-        foreach ( glob($configPath.'/*.php') as $file) {
+        foreach (glob($configPath.'/*.php') as $file) {
             $directory = $this->getNestedDirectory($file, $configPath);
 
             $files[$directory.basename($file, '.php')] = $file;
@@ -128,7 +200,7 @@ class LoadConfiguration
      * @param  string  $configPath
      * @return string
      */
-    protected function getNestedDirectory( $file, $configPath)
+    protected function getNestedDirectory($file, $configPath)
     {
         $directory = dirname($file);
 
