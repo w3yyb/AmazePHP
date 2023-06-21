@@ -94,15 +94,13 @@ class ErrorHandel
               }else{
                 include __DIR__. "/Tpl/404.html";
               }
-
-          
         } elseif ($errorinfostr == "405 Not Allowed") {
             http_response_code(405);
 
 
             if (request()->expectsJson() || request()->isJson()) {
                 echo json_encode(['code'=>405,   'message'=>'error'  ,'content' => $errorinfostr]);
-              }else{
+            } else {
                 echo '<html>
             <head>
                <title>
@@ -122,9 +120,6 @@ class ErrorHandel
          </body>
          </html>';
               }
-
-
-          
         } else {
             http_response_code(500);
             $this->logError($errorinfo, "error");
@@ -133,8 +128,8 @@ class ErrorHandel
             }
 
             if (request()->expectsJson() || request()->isJson()) {
-              echo json_encode(['code'=>500,   'message'=>'error'  ,'content' => $errorinfo]);
-            }else{
+                echo json_encode(['code'=>500,   'message'=>'error'  ,'content' => $errorinfo]);
+            } else {
                 include __DIR__. "/Tpl/500.html";
             }
         }
@@ -182,7 +177,11 @@ class ErrorHandel
     public function logError($err, $level)
     {
         // $this->log->$level($err);
-        logger($err,$level);
+        try {
+            logger($err,$level);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     public function __destruct()
