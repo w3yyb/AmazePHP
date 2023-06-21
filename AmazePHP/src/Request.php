@@ -334,7 +334,7 @@ class Request
      */
     public function decodedPath()
     {
-        return rawurldecode($this->path());
+        return rawurldecode($this->path() ?? '');
     }
 
 
@@ -416,7 +416,7 @@ class Request
 
     public function getAcceptableContentTypes()
     {
-        $accept =$this->header('accept') ?? [];
+        $accept =$this->header('accept') ?? '';
         $accepts =  array_keys(AcceptHeader::fromString($accept)->all());
         return $accepts;
     }
