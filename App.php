@@ -4,7 +4,7 @@ use AmazePHP\Router;
 use AmazePHP\LoadConfiguration;
 
 define('BASE_PATH', __DIR__);
-define('APP_VERSION', '2.3.1');
+define('APP_VERSION', '2.3.2');
 include 'AmazePHP/src/DotEnv.php';
 include 'AmazePHP/src/ErrorHandel.php';
 (new AmazePHP\DotEnv());
