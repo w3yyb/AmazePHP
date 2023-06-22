@@ -333,7 +333,7 @@ $value = session('name')
 ## cookie 
 ### get cookie
 ```
-$value = $_COOKIE['name'];
+$value = request()->cookie('name');
 ```
 ### set cookie 
 ```
