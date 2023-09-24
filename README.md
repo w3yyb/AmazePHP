@@ -138,9 +138,7 @@ The middleware key  is optional  register routing middleware.
 ### Requests 
  AmazePHP\Request class provides an object-oriented way to interact with the current HTTP request being handled by your application as well as retrieve the input, cookies, and files that were submitted with the request.
 
- ### Responses  
- AmazePHP does not provide a Respose class  for performance reasons. 
- Use header() funcion and echo or return  to response in controllers or middleware.
+
  #### usage
  ```
  $input = request()->all();
@@ -168,6 +166,10 @@ $input = request()->except(['credit_card']);
 
  ```
  More usage see AmazePHP/src/Request.php.
+
+  ### Responses  
+ AmazePHP does not provide a Respose class  for performance reasons. 
+ Use header() funcion and echo or return  to response in controllers or middleware.
 ### Controllers 
 Instead of defining all of your request handling logic as closures in your route files, you may wish to organize this behavior using "controller" classes. Controllers can group related request handling logic into a single class. For example, a `UserController` class might handle all incoming requests related to users, including showing, creating, updating, and deleting users. By default, controllers are stored in the `app/Controllers` directory.
 #### Writing Controllers 
