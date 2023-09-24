@@ -8,6 +8,7 @@ There are no complicated concepts, so it has the lowest learning curve.
 - Env Vars  
 - Routing    
 - Requests 
+- Responses
 - Controllers 
 - Middleware 
 - Facades 
@@ -15,7 +16,7 @@ There are no complicated concepts, so it has the lowest learning curve.
 - Database  
 - Http Client  
 - Logging   
-- Templates 
+- View & Templates 
 - Error Handling  
 - Cache 
 - Session 
@@ -136,6 +137,10 @@ The middleware key  is optional  register routing middleware.
 
 ### Requests 
  AmazePHP\Request class provides an object-oriented way to interact with the current HTTP request being handled by your application as well as retrieve the input, cookies, and files that were submitted with the request.
+
+ ### Responses  
+ AmazePHP does not provide a Respose class  for performance reasons. 
+ Use header() funcion and echo or return  to response in controllers or middleware.
  #### usage
  ```
  $input = request()->all();
