@@ -2,7 +2,8 @@
 
 English | [中文](./README_CN.md)
 
-</div>
+</div>  
+
 # AmazePHP
 ## About AmazePHP  
 A good choice for starting a PHP project, it can be used for web and API development. It only takes one minute to start a project. It has super high performance and a very easy-to-use development experience.

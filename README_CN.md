@@ -2,7 +2,8 @@
 
 中文 | [English](./README.md)
 
-</div>
+</div>  
+
 # AmazePHP
 ## 关于 AmazePHP  
 AmazePHP 是启动 PHP 项目的绝佳选择，适用于 Web 和 API 开发。只需一分钟即可启动项目。它具有超高性能和非常易于使用的开发体验。
